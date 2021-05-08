@@ -45,6 +45,11 @@ namespace English_exam
             return dt;
         }
 
+        [WebMethod]
+        public void AddClient(Client client )
+        {
+
+        }
 
         [WebMethod]
         public DataTable GetAllClients()
