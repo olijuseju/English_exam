@@ -67,16 +67,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web References\localhost\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\localhost\WebService1.disco" />
     <Content Include="WebForm1.aspx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Web References\localhost\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <None Include="Web References\localhost\WebService1.disco" />
     <Content Include="Web.config" />
     <None Include="Web References\localhost\WebService1.wsdl" />
   </ItemGroup>
@@ -112,9 +112,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WebReference\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
