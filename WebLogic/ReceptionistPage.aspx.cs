@@ -22,9 +22,9 @@ namespace WebLogic
             if (NameClient.Text != "" && LastnameClient.Text != "" && CardNumberClient.Text != "" 
                 && PhoneClient.Text != "" && EmailClient.Text != "" && PasswordClient.Text != "")
             {
-                int cardNumber = Int16.Parse(CardNumberClient.Text);
-                int phone = Int16.Parse(PhoneClient.Text);
-                webService.AddClient(NameClient.Text, LastnameClient.Text, cardNumber, phone, EmailClient.Text, PasswordClient.Text);
+                int cardNumber = Convert.ToInt32(CardNumberClient.Text);
+                int phone = Convert.ToInt32(PhoneClient.Text);
+                webService.AddClient("name","last",3434,234242,"ASFAF","dsfsd");
             }
             else
             {
