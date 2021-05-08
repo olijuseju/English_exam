@@ -32,20 +32,26 @@
     <form id="form1" runat="server">
         <div class="container">
             <div>
-            <asp:TextBox ID="NameClient" runat="server" Text="name" ></asp:TextBox>
-            <asp:TextBox ID="LastnameClient" runat="server" Text="lastname"></asp:TextBox>
-            <asp:TextBox ID="CardNumberClient" runat="server" Text="cardNumber" TextMode="Number" ></asp:TextBox>
-            <asp:TextBox ID="PhoneClient" runat="server" Text="phone" TextMode="Phone"></asp:TextBox>
-            <asp:TextBox ID="EmailClient" runat="server" Text="email" TextMode="Email"></asp:TextBox>
-            <asp:TextBox ID="PasswordClient" runat="server" Text="password" TextMode="Password"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" Text="Create client" OnClick="Button1_Click" />
+                <asp:TextBox ID="NameClient" runat="server" Text="name" ></asp:TextBox>
+                <asp:TextBox ID="LastnameClient" runat="server" Text="lastname"></asp:TextBox>
+                <asp:TextBox ID="CardNumberClient" runat="server" Text="cardNumber" TextMode="Number" ></asp:TextBox>
+                <asp:TextBox ID="PhoneClient" runat="server" Text="phone" TextMode="Phone"></asp:TextBox>
+                <asp:TextBox ID="EmailClient" runat="server"  TextMode="Email"></asp:TextBox>
+                <asp:TextBox ID="PasswordClient" runat="server" Text="password" TextMode="Password"></asp:TextBox>
+                <asp:Button ID="Button1" runat="server" Text="Create client" OnClick="Button1_Click" />
 
 
-            <asp:ListBox ID="ListBox1" runat="server" Height="129px" Width="172px"></asp:ListBox>
+                <asp:ListBox ID="ListOfClients" runat="server" Height="129px" Width="172px"></asp:ListBox>
             </div>
             <div class="col-12">
-            
+                <asp:TextBox ID="CliendIdReservation" runat="server"></asp:TextBox>
+                <asp:TextBox ID="ArrivalDateReservation" runat="server"></asp:TextBox>
+                <asp:TextBox ID="ExitDateReservation" runat="server"></asp:TextBox>
+                <asp:TextBox ID="PeopleQuantityReservation" runat="server"></asp:TextBox>
+                <asp:TextBox ID="RoomIdReservation" runat="server"></asp:TextBox>
+                <asp:Button ID="Button2" runat="server" Text="Create reservation" OnClick="Button2_Click" />
 
+                <asp:ListBox ID="ListOfReservations" runat="server"></asp:ListBox>
             </div>
         </div>
         
