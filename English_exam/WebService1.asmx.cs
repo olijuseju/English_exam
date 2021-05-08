@@ -46,13 +46,7 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ( @name , @lastname , @card , @phone , @email , @pass  )", conn);
-                comm.Parameters.AddWithValue("@name", client.name);
-                comm.Parameters.AddWithValue("@lastname", client.lastName);
-                comm.Parameters.AddWithValue("@card", client.cardNumer);
-                comm.Parameters.AddWithValue("@phone", client.phone);
-                comm.Parameters.AddWithValue("@email", client.email);
-                comm.Parameters.AddWithValue("@pass", client.password);
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ( '"+client.name +"' , '"+ client.lastName +"' , '" + client.cardNumer + "' , '" + client.phone +"' , '" + client.email +"' , '" + client.password +"'  )", conn);
                 SQLiteDataAdapter da = new SQLiteDataAdapter();
                 da.InsertCommand = comm;
                 da.InsertCommand.ExecuteNonQuery();
