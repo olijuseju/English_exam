@@ -21,7 +21,7 @@ namespace WebLogic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            WebService1 ws = new WebService1();
+           /* WebService1 ws = new WebService1();
             string user = EmailTextBox.Text;
             string pass = PassTextBox.Text;
             using (MD5 md5Hash = MD5.Create())
@@ -60,7 +60,7 @@ namespace WebLogic
                         }
                     }
                 }
-            }
+            }*/
         }
     }
 }

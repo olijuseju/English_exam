@@ -36,7 +36,7 @@ namespace English_exam
             conn.Open();
             using (conn)
             {
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM login WHERE email ='" + user + "'", conn);
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Login WHERE email ='" + user + "'", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
@@ -52,7 +52,7 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("INSERT INTO client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ("+ client +" )", conn);
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ("+ client +" )", conn);
 
                 SQLiteDataAdapter da = new SQLiteDataAdapter();
                 da.InsertCommand = comm;
@@ -71,13 +71,15 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
                 {
                     conn.Open();
-                    SQLiteCommand comm = new SQLiteCommand("SELECT * FROM client", conn);
+                    SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Client", conn);
                     SQLiteDataReader reader = comm.ExecuteReader();
                     dt.Load(reader);
                     conn.Close();
                 }
             return dt;
         }
+
+        [WebMethod]
 
         public DataTable GetAllReservations()
         {
@@ -88,13 +90,15 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM reservation", conn);
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Reservation", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 conn.Close();
             }
             return dt;
         }
+
+        [WebMethod]
 
         public DataTable GetAllReceptionists()
         {
@@ -105,7 +109,7 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM receptionist", conn);
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Receptionist", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 conn.Close();
@@ -113,6 +117,7 @@ namespace English_exam
             return dt;
         }
 
+        [WebMethod]
 
         public DataTable GetAllRoom()
         {
@@ -123,7 +128,7 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM room", conn);
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Room", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 conn.Close();
