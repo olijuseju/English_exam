@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClientsPage.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ReceptionistPage.aspx" />
     <Content Include="Web References\localhost1\Reference.map">
@@ -93,6 +94,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="ClientsPage.aspx.cs">
+      <DependentUpon>ClientsPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientsPage.aspx.designer.cs">
+      <DependentUpon>ClientsPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

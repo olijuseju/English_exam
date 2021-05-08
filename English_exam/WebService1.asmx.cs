@@ -146,6 +146,42 @@ namespace English_exam
         }
 
         [WebMethod]
+        public DataTable GetRoomById(int id)
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Room WHERE `id` =" + id, conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable GetReservationByClientId(int Cid)
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Reservation WHERE `clientId` =" + Cid, conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
         public DataTable GetRecepcionistById(int id)
         {
 
