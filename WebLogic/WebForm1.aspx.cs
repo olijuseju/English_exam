@@ -20,6 +20,8 @@ namespace WebLogic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+
+
             WebService1 webService = new WebService1();
             //TextBox1.Text = webService.HelloWorld();
             DataTable dt = webService.GetAllClients();

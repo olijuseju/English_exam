@@ -54,7 +54,7 @@ namespace English_exam
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
                 {
                     conn.Open();
-                    SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Client", conn);
+                    SQLiteCommand comm = new SQLiteCommand("SELECT * FROM client", conn);
                     SQLiteDataReader reader = comm.ExecuteReader();
                     dt.Load(reader);
                     conn.Close();
