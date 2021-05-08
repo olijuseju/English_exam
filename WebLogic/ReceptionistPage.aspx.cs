@@ -19,12 +19,12 @@ namespace WebLogic
         protected void Button1_Click(object sender, EventArgs e)
         {
             WebService1 webService = new WebService1();
-            if (TextBox1.Text != "" && TextBox2.Text != "" && TextBox3.Text != "" 
-                && TextBox4.Text != "" && TextBox5.Text != "" && TextBox6.Text != "")
+            if (NameClient.Text != "" && LastnameClient.Text != "" && CardNumberClient.Text != "" 
+                && PhoneClient.Text != "" && EmailClient.Text != "" && PasswordClient.Text != "")
             {
-                int cardNumber = Int16.Parse(TextBox3.Text);
-                int phone = Int16.Parse(TextBox4.Text);
-                webService.AddClient(TextBox1.Text, TextBox2.Text, cardNumber, phone, TextBox5.Text, TextBox6.Text);
+                int cardNumber = Int16.Parse(CardNumberClient.Text);
+                int phone = Int16.Parse(PhoneClient.Text);
+                webService.AddClient(NameClient.Text, LastnameClient.Text, cardNumber, phone, EmailClient.Text, PasswordClient.Text);
             }
             else
             {

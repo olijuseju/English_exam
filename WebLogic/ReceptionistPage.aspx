@@ -11,12 +11,12 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:TextBox ID="TextBox1" runat="server" Text="name"></asp:TextBox>
-            <asp:TextBox ID="TextBox2" runat="server" Text="lastname"></asp:TextBox>
-            <asp:TextBox ID="TextBox3" runat="server" Text="cardNumber"></asp:TextBox>
-            <asp:TextBox ID="TextBox4" runat="server" Text="phone"></asp:TextBox>
-            <asp:TextBox ID="TextBox5" runat="server" Text="email"></asp:TextBox>
-            <asp:TextBox ID="TextBox6" runat="server" Text="password"></asp:TextBox>
+            <asp:TextBox ID="NameClient" runat="server" Text="name" ></asp:TextBox>
+            <asp:TextBox ID="LastnameClient" runat="server" Text="lastname"></asp:TextBox>
+            <asp:TextBox ID="CardNumberClient" runat="server" Text="cardNumber" ></asp:TextBox>
+            <asp:TextBox ID="PhoneClient" runat="server" Text="phone"></asp:TextBox>
+            <asp:TextBox ID="EmailClient" runat="server" Text="email"></asp:TextBox>
+            <asp:TextBox ID="PasswordClient" runat="server" Text="password" TextMode="Password"></asp:TextBox>
             <asp:Button ID="Button1" runat="server" Text="Create client" OnClick="Button1_Click" />
 
 
