@@ -21,7 +21,7 @@ namespace WebLogic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-           /* WebService1 ws = new WebService1();
+            WebService1 ws = new WebService1();
             string user = EmailTextBox.Text;
             string pass = PassTextBox.Text;
             using (MD5 md5Hash = MD5.Create())
@@ -37,7 +37,7 @@ namespace WebLogic
             DataTable dt = ws.Login(user, pass);
             foreach (DataRow dr in dt.Rows)
             {
-                if (dr["username"].ToString() == user)
+                if (dr["email"].ToString() == user)
                 {
                     using (MD5 md5Hash = MD5.Create())
                     {
@@ -45,22 +45,20 @@ namespace WebLogic
                         string passHash = dr["password"].ToString().ToUpper();
                         if (pass == passHash)
                         {
-                            FormsAuthentication.SetAuthCookie(user, true);
-
-                            if (dr["role"].ToString() == "administrator")
+                            if (dr["role"].ToString() == "recepcionist")
                             {
-                                Response.Redirect("./Admin/Administrator.aspx");
+                                Response.Redirect("./ReceptionistPage.aspx");
 
                             }
-                            else
+                            else if (dr["role"].ToString() == "client")
                             {
-                                Response.Redirect("./Students/Student.aspx");
+                                Response.Redirect("./Webform2.aspx");
 
                             }
                         }
                     }
                 }
-            }*/
+            }
         }
     }
 }

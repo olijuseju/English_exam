@@ -56,6 +56,57 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetAllReservations">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllReservationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReservationsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllReceptionists">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllReceptionistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllReceptionistsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllRoom">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllRoomResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllRoomResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginSoapIn">
@@ -76,6 +127,24 @@
   <wsdl:message name="GetAllClientsSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllClientsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetAllReservationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReservations" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReservationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReservationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceptionistsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllReceptionists" />
+  </wsdl:message>
+  <wsdl:message name="GetAllReceptionistsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllReceptionistsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllRoom" />
+  </wsdl:message>
+  <wsdl:message name="GetAllRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllRoomResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
@@ -88,6 +157,18 @@
     <wsdl:operation name="GetAllClients">
       <wsdl:input message="tns:GetAllClientsSoapIn" />
       <wsdl:output message="tns:GetAllClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservations">
+      <wsdl:input message="tns:GetAllReservationsSoapIn" />
+      <wsdl:output message="tns:GetAllReservationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceptionists">
+      <wsdl:input message="tns:GetAllReceptionistsSoapIn" />
+      <wsdl:output message="tns:GetAllReceptionistsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoom">
+      <wsdl:input message="tns:GetAllRoomSoapIn" />
+      <wsdl:output message="tns:GetAllRoomSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -119,6 +200,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllReservations">
+      <soap:operation soapAction="http://tempuri.org/GetAllReservations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceptionists">
+      <soap:operation soapAction="http://tempuri.org/GetAllReceptionists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoom">
+      <soap:operation soapAction="http://tempuri.org/GetAllRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -142,6 +250,33 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllClients">
       <soap12:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReservations">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReservations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllReceptionists">
+      <soap12:operation soapAction="http://tempuri.org/GetAllReceptionists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRoom">
+      <soap12:operation soapAction="http://tempuri.org/GetAllRoom" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
