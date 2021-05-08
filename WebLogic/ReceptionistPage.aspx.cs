@@ -10,7 +10,7 @@ namespace WebLogic
 {
     public partial class ReceptionistPage : System.Web.UI.Page
     {
-        WebService1 webService;
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -22,9 +22,8 @@ namespace WebLogic
             if (NameClient.Text != "" && LastnameClient.Text != "" && CardNumberClient.Text != "" 
                 && PhoneClient.Text != "" && EmailClient.Text != "" && PasswordClient.Text != "")
             {
-                int cardNumber = Convert.ToInt32(CardNumberClient.Text);
-                int phone = Convert.ToInt32(PhoneClient.Text);
-                webService.AddClient("name","last",3434,234242,"ASFAF","dsfsd");
+                
+                webService.AddClient(NameClient.Text , LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text) , Convert.ToInt32(PhoneClient.Text) , EmailClient.Text , PasswordClient.Text);
             }
             else
             {

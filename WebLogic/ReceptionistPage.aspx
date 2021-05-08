@@ -13,9 +13,9 @@
         <div>
             <asp:TextBox ID="NameClient" runat="server" Text="name" ></asp:TextBox>
             <asp:TextBox ID="LastnameClient" runat="server" Text="lastname"></asp:TextBox>
-            <asp:TextBox ID="CardNumberClient" runat="server" Text="cardNumber" ></asp:TextBox>
-            <asp:TextBox ID="PhoneClient" runat="server" Text="phone"></asp:TextBox>
-            <asp:TextBox ID="EmailClient" runat="server" Text="email"></asp:TextBox>
+            <asp:TextBox ID="CardNumberClient" runat="server" Text="cardNumber" TextMode="Number" ></asp:TextBox>
+            <asp:TextBox ID="PhoneClient" runat="server" Text="phone" TextMode="Phone"></asp:TextBox>
+            <asp:TextBox ID="EmailClient" runat="server" Text="email" TextMode="Email"></asp:TextBox>
             <asp:TextBox ID="PasswordClient" runat="server" Text="password" TextMode="Password"></asp:TextBox>
             <asp:Button ID="Button1" runat="server" Text="Create client" OnClick="Button1_Click" />
 
