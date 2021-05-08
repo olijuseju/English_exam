@@ -24,11 +24,11 @@ namespace WebLogic
             WebService1 ws = new WebService1();
             string user = EmailTextBox.Text;
             string pass = PassTextBox.Text;
-            using (MD5 md5Hash = MD5.Create())
+            /*using (MD5 md5Hash = MD5.Create())
             {
                 byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
                 pass = BitConverter.ToString(data).Replace("*", string.Empty);
-            }
+            }*/
             if (user.Length == 0 || pass.Length == 0)
             {
                 return;
@@ -37,26 +37,13 @@ namespace WebLogic
             DataTable dt = ws.Login(user, pass);
             foreach (DataRow dr in dt.Rows)
             {
-                if (dr["email"].ToString() == user)
+                if (dr["type"].ToString() == "client")
                 {
-                    using (MD5 md5Hash = MD5.Create())
-                    {
-
-                        string passHash = dr["password"].ToString().ToUpper();
-                        if (pass == passHash)
-                        {
-                            if (dr["role"].ToString() == "recepcionist")
-                            {
-                                Response.Redirect("./ReceptionistPage.aspx");
-
-                            }
-                            else if (dr["role"].ToString() == "client")
-                            {
-                                Response.Redirect("./Webform2.aspx");
-
-                            }
-                        }
-                    }
+                    PassTextBox.Text = dr["email"].ToString();
+                }
+                else
+                {
+                    TextBox1.Text = dr["email"].ToString();
                 }
             }
         }

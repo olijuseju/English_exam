@@ -26,19 +26,11 @@ namespace English_exam
         {
             DataTable dt = new DataTable();
             string DBpath = Server.MapPath("database/marseloDatabase.db");
-            using (MD5 md5Hash = MD5.Create())
-            {
-                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(pass));
-                pass = BitConverter.ToString(data).Replace("-", string.Empty);
-            }
             SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;");
-
             conn.Open();
             using (conn)
             {
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Login WHERE `email` = @email AND `password` = @pass", conn);
-                comm.Parameters.AddWithValue("@email", Convert.ToString(user));
-                comm.Parameters.AddWithValue("@pass", Convert.ToString(pass));
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Login WHERE `email` ='" + user+"' AND `password` ='" + pass+"' ;", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
