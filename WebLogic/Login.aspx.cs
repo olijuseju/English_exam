@@ -37,13 +37,27 @@ namespace WebLogic
             DataTable dt = ws.Login(user, pass);
             foreach (DataRow dr in dt.Rows)
             {
-                if (dr["type"].ToString() == "client")
+                if (dr["type"].ToString().Equals("client"))
                 {
-                    PassTextBox.Text = dr["email"].ToString();
+                    DataTable dtClient = ws.GetClientById(Convert.ToInt32(dr["idUser"]));
+                    foreach(DataRow drClient in dtClient.Rows)
+                    {
+                        int valor =Convert.ToInt32(drClient["id"]);
+
+                        Session["valor1"] = valor;
+                        Response.Redirect("WebForm2.aspx");
+                    }
                 }
                 else
                 {
-                    TextBox1.Text = dr["email"].ToString();
+                    DataTable dtRec = ws.GetRecepcionistById(Convert.ToInt32(dr["idUser"]));
+                    foreach (DataRow drRecep in dtRec.Rows)
+                    {
+                        int valor = Convert.ToInt32(drRecep["id"]);
+
+                        Session["valor1"] = valor;
+                        Response.Redirect("WebForm2.aspx");
+                    }
                 }
             }
         }

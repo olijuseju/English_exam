@@ -56,6 +56,48 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetClientById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecepcionistById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRecepcionistByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRecepcionistByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetAllReservations">
         <s:complexType />
       </s:element>
@@ -127,6 +169,18 @@
   <wsdl:message name="GetAllClientsSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllClientsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetClientByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientById" />
+  </wsdl:message>
+  <wsdl:message name="GetClientByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRecepcionistByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRecepcionistById" />
+  </wsdl:message>
+  <wsdl:message name="GetRecepcionistByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRecepcionistByIdResponse" />
+  </wsdl:message>
   <wsdl:message name="GetAllReservationsSoapIn">
     <wsdl:part name="parameters" element="tns:GetAllReservations" />
   </wsdl:message>
@@ -157,6 +211,14 @@
     <wsdl:operation name="GetAllClients">
       <wsdl:input message="tns:GetAllClientsSoapIn" />
       <wsdl:output message="tns:GetAllClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientById">
+      <wsdl:input message="tns:GetClientByIdSoapIn" />
+      <wsdl:output message="tns:GetClientByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRecepcionistById">
+      <wsdl:input message="tns:GetRecepcionistByIdSoapIn" />
+      <wsdl:output message="tns:GetRecepcionistByIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetAllReservations">
       <wsdl:input message="tns:GetAllReservationsSoapIn" />
@@ -193,6 +255,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllClients">
       <soap:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientById">
+      <soap:operation soapAction="http://tempuri.org/GetClientById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecepcionistById">
+      <soap:operation soapAction="http://tempuri.org/GetRecepcionistById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -250,6 +330,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllClients">
       <soap12:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientById">
+      <soap12:operation soapAction="http://tempuri.org/GetClientById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRecepcionistById">
+      <soap12:operation soapAction="http://tempuri.org/GetRecepcionistById" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
