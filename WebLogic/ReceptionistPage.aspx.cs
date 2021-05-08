@@ -22,12 +22,21 @@ namespace WebLogic
             if (NameClient.Text != "" && LastnameClient.Text != "" && CardNumberClient.Text != "" 
                 && PhoneClient.Text != "" && EmailClient.Text != "" && PasswordClient.Text != "")
             {
-                
-                webService.AddClient(NameClient.Text , LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text) , Convert.ToInt32(PhoneClient.Text) , EmailClient.Text , PasswordClient.Text);
+                if(webService.ClientExists(NameClient.Text, LastnameClient.Text, 
+                    Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), 
+                    EmailClient.Text, PasswordClient.Text).Equals(true))
+                {
+                    //dialog exite client
+                }
+                else
+                {
+                    webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), EmailClient.Text, PasswordClient.Text);
+
+                }
             }
             else
             {
-
+                //dialog que esta vacio
             }
         }
     }
