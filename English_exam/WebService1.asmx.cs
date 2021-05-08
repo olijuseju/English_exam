@@ -62,11 +62,5 @@ namespace English_exam
             return dt;
         }
 
-
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
     }
 }

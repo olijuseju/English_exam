@@ -7,6 +7,23 @@ namespace WebLogic
 {
     public class Recepcionist
     {
+
+        public Recepcionist()
+        {
+
+        }
+
+        public Recepcionist(int id, string name, string lastName, string email, string password, int role)
+        {
+            this.id = id;
+            this.name = name;
+            this.lastName = lastName;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+        }
+
+
         public int id { get; set; }
         public string name { get; set; }
         public string lastName { get; set; }
