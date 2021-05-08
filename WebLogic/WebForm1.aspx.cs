@@ -20,9 +20,9 @@ namespace WebLogic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            Response.Redirect("Login.aspx");
 
-
-            WebService1 webService = new WebService1();
+            /*WebService1 webService = new WebService1();
             //TextBox1.Text = webService.HelloWorld();
             DataTable dt = webService.GetAllClients();
             
@@ -30,7 +30,7 @@ namespace WebLogic
             foreach (DataRow dr in dt.Rows)
             {
                 TextBox1.Text = dr[1].ToString();
-            }
+            }*/
         }
     }
 }
