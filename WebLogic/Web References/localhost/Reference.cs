@@ -32,6 +32,8 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback LoginOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AddClientOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetAllClientsOperationCompleted;
         
         private System.Threading.SendOrPostCallback HelloWorldOperationCompleted;
@@ -78,6 +80,9 @@ namespace WebLogic.localhost {
         public event LoginCompletedEventHandler LoginCompleted;
         
         /// <remarks/>
+        public event AddClientCompletedEventHandler AddClientCompleted;
+        
+        /// <remarks/>
         public event GetAllClientsCompletedEventHandler GetAllClientsCompleted;
         
         /// <remarks/>
@@ -111,6 +116,44 @@ namespace WebLogic.localhost {
             if ((this.LoginCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LoginCompleted(this, new LoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddClient(string name, string lastname, int cardnumber, int phone, string email, string password) {
+            this.Invoke("AddClient", new object[] {
+                        name,
+                        lastname,
+                        cardnumber,
+                        phone,
+                        email,
+                        password});
+        }
+        
+        /// <remarks/>
+        public void AddClientAsync(string name, string lastname, int cardnumber, int phone, string email, string password) {
+            this.AddClientAsync(name, lastname, cardnumber, phone, email, password, null);
+        }
+        
+        /// <remarks/>
+        public void AddClientAsync(string name, string lastname, int cardnumber, int phone, string email, string password, object userState) {
+            if ((this.AddClientOperationCompleted == null)) {
+                this.AddClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddClientOperationCompleted);
+            }
+            this.InvokeAsync("AddClient", new object[] {
+                        name,
+                        lastname,
+                        cardnumber,
+                        phone,
+                        email,
+                        password}, this.AddClientOperationCompleted, userState);
+        }
+        
+        private void OnAddClientOperationCompleted(object arg) {
+            if ((this.AddClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -212,6 +255,10 @@ namespace WebLogic.localhost {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
