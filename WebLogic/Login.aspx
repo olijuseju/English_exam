@@ -9,9 +9,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-            <asp:Button ID="Button1" runat="server" Text="Login" />
+            <asp:TextBox ID="EmailTextBox" runat="server"></asp:TextBox>
+            <asp:TextBox ID="PassTextBox" runat="server"></asp:TextBox>
+            <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
         </div>
     </form>
 </body>

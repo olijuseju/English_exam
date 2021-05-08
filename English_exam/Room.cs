@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace WebLogic
+namespace English_exam
 {
     public class Room
     {
@@ -22,6 +22,7 @@ namespace WebLogic
             this.spaces = spaces;
         }
 
+
         public Room(int number, string typeRoom, string name, string available, int spaces)
         {
             this.number = number;
@@ -30,7 +31,6 @@ namespace WebLogic
             this.available = available;
             this.spaces = spaces;
         }
-
         public int id { get; set; }
         public int number { get; set; }
         public string typeRoom { get; set; }

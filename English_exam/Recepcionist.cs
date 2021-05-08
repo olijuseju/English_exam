@@ -23,7 +23,6 @@ namespace WebLogic
             this.role = role;
         }
 
-
         public Recepcionist(string name, string lastName, string email, string password, int role)
         {
             this.name = name;
@@ -32,6 +31,7 @@ namespace WebLogic
             this.password = password;
             this.role = role;
         }
+
 
         public int id { get; set; }
         public string name { get; set; }

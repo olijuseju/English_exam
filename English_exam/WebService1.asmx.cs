@@ -24,7 +24,6 @@ namespace English_exam
         [WebMethod]
         public DataTable Login(string user, string pass)
         {
-
             DataTable dt = new DataTable();
             string DBpath = Server.MapPath("marseloDatabase.db");
             using (MD5 md5Hash = MD5.Create())
@@ -37,7 +36,7 @@ namespace English_exam
             conn.Open();
             using (conn)
             {
-                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Login WHERE username ='" + user + "'", conn);
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM login WHERE email ='" + user + "'", conn);
                 SQLiteDataReader reader = comm.ExecuteReader();
                 dt.Load(reader);
                 reader.Close();
@@ -54,6 +53,8 @@ namespace English_exam
         [WebMethod]
         public DataTable GetAllClients()
         {
+
+            List<Client> listClients= new List<Client>();
             string DBpath = Server.MapPath("database/marseloDatabase.db");
             DataTable dt = new DataTable();
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
@@ -67,5 +68,56 @@ namespace English_exam
             return dt;
         }
 
+        public DataTable GetAllReservations()
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM reservation", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+        public DataTable GetAllReceptionists()
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM receptionist", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+
+        public DataTable GetAllRoom()
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM room", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
     }
 }
