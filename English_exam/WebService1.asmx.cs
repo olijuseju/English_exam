@@ -46,9 +46,20 @@ namespace English_exam
         }
 
         [WebMethod]
-        public void AddClient(Client client )
+        public void AddClient(string name, string lastname, int cardnumber, int phone, string email , string password)
         {
+            Client client = new Client(name,lastname,cardnumber,phone,email,password);
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ("+ client +" )", conn);
 
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
         }
 
         [WebMethod]
