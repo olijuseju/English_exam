@@ -56,7 +56,7 @@ namespace WebLogic
                         int valor = Convert.ToInt32(drRecep["id"]);
 
                         Session["valor1"] = valor;
-                        Response.Redirect("WebForm2.aspx");
+                        Response.Redirect("ReceptionistPage.aspx");
                     }
                 }
             }

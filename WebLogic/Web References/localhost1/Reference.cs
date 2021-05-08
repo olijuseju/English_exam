@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace WebLogic.localhost {
+namespace WebLogic.localhost1 {
     using System;
     using System.Web.Services;
     using System.Diagnostics;

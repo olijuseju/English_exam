@@ -71,33 +71,43 @@ namespace English_exam
                 da.InsertCommand.ExecuteNonQuery();
                 conn.Close();
             }
-            /*using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
-            {
-                conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Login (email, password, type, idUser) VALUES ( '"+client.email +"' , '"+ client.password +"' , 'client' , '" + client.phone +"'  )", conn);
-                SQLiteDataAdapter da = new SQLiteDataAdapter();
-                da.InsertCommand = comm;
-                da.InsertCommand.ExecuteNonQuery();
-                conn.Close();
-            }*/
+            
         }
 
-        /*[WebMethod]
-        public void AddReservation(string name, string lastname, int cardnumber, int phone, string email, string password)
+        [WebMethod]
+        public bool ReservationExists(int clientId, int recepcionistId, int arrivalDate, int exitDate, int peopleQuatenty, int roomId)
         {
-            Client client = new Client(name, lastname, cardnumber, phone, email, password);
+            DataTable dt = GetAllReservations();
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr[1].ToString().Equals(Convert.ToString(clientId)) && dr[2].ToString().Equals(Convert.ToString(recepcionistId)) && dr[3].ToString().Equals(Convert.ToString(arrivalDate))
+                    && dr[4].ToString().Equals(Convert.ToString(exitDate)) && dr[5].ToString().Equals(Convert.ToString(peopleQuatenty)) && dr[6].ToString().Equals(Convert.ToString(roomId)))
+                {
+                    return true;
+                }
+
+            }
+
+            return false;
+
+        }
+
+        [WebMethod]
+        public void AddReservation(int clientId, int recepcionistId, int arrivalDate, int exitDate, int peopleQuatenty, int roomId)
+        {
+            Reservation reservation = new Reservation(clientId,recepcionistId, arrivalDate,exitDate, peopleQuatenty,roomId);
             string DBpath = Server.MapPath("database/marseloDatabase.db");
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ( '" + client.name + "' , '" + client.lastName + "' , '" + client.cardNumer + "' , '" + client.phone + "' , '" + client.email + "' , '" + client.password + "'  )", conn);
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Reservation (ClientId, RecepcionistId, ArrivalDate, ExitDate,PeopleQuantity,RoomId) VALUES ( '" + reservation.clientId + "' , '" + reservation.RecepcionistId + "' , '" + reservation.arrivalDate + "' , '" + reservation.exitDate + "' , '" + reservation.PeopleQuantity + "' , '" + reservation.RoomId + "'  )", conn);
                 SQLiteDataAdapter da = new SQLiteDataAdapter();
                 da.InsertCommand = comm;
                 da.InsertCommand.ExecuteNonQuery();
                 conn.Close();
             }
             
-        }*/
+        }
 
         [WebMethod]
         public DataTable GetAllClients()

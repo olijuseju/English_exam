@@ -32,5 +32,15 @@ namespace WebLogic.Properties {
                 return ((string)(this["WebLogic_localhost_WebService1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:44308/WebService1.asmx")]
+        public string WebLogic_localhost1_WebService1 {
+            get {
+                return ((string)(this["WebLogic_localhost1_WebService1"]));
+            }
+        }
     }
 }
