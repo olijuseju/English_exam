@@ -36,6 +36,12 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback GetAllClientsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetAllReservationsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllReceptionistsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllRoomOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -82,6 +88,15 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         public event GetAllClientsCompletedEventHandler GetAllClientsCompleted;
+        
+        /// <remarks/>
+        public event GetAllReservationsCompletedEventHandler GetAllReservationsCompleted;
+        
+        /// <remarks/>
+        public event GetAllReceptionistsCompletedEventHandler GetAllReceptionistsCompleted;
+        
+        /// <remarks/>
+        public event GetAllRoomCompletedEventHandler GetAllRoomCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Login", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -180,6 +195,87 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllReservations", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllReservations() {
+            object[] results = this.Invoke("GetAllReservations", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllReservationsAsync() {
+            this.GetAllReservationsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllReservationsAsync(object userState) {
+            if ((this.GetAllReservationsOperationCompleted == null)) {
+                this.GetAllReservationsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllReservationsOperationCompleted);
+            }
+            this.InvokeAsync("GetAllReservations", new object[0], this.GetAllReservationsOperationCompleted, userState);
+        }
+        
+        private void OnGetAllReservationsOperationCompleted(object arg) {
+            if ((this.GetAllReservationsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllReservationsCompleted(this, new GetAllReservationsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllReceptionists", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllReceptionists() {
+            object[] results = this.Invoke("GetAllReceptionists", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllReceptionistsAsync() {
+            this.GetAllReceptionistsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllReceptionistsAsync(object userState) {
+            if ((this.GetAllReceptionistsOperationCompleted == null)) {
+                this.GetAllReceptionistsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllReceptionistsOperationCompleted);
+            }
+            this.InvokeAsync("GetAllReceptionists", new object[0], this.GetAllReceptionistsOperationCompleted, userState);
+        }
+        
+        private void OnGetAllReceptionistsOperationCompleted(object arg) {
+            if ((this.GetAllReceptionistsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllReceptionistsCompleted(this, new GetAllReceptionistsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllRoom", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllRoom() {
+            object[] results = this.Invoke("GetAllRoom", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllRoomAsync() {
+            this.GetAllRoomAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllRoomAsync(object userState) {
+            if ((this.GetAllRoomOperationCompleted == null)) {
+                this.GetAllRoomOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllRoomOperationCompleted);
+            }
+            this.InvokeAsync("GetAllRoom", new object[0], this.GetAllRoomOperationCompleted, userState);
+        }
+        
+        private void OnGetAllRoomOperationCompleted(object arg) {
+            if ((this.GetAllRoomCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllRoomCompleted(this, new GetAllRoomCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -241,6 +337,84 @@ namespace WebLogic.localhost {
         private object[] results;
         
         internal GetAllClientsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAllReservationsCompletedEventHandler(object sender, GetAllReservationsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllReservationsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllReservationsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAllReceptionistsCompletedEventHandler(object sender, GetAllReceptionistsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllReceptionistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllReceptionistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAllRoomCompletedEventHandler(object sender, GetAllRoomCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllRoomCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllRoomCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
