@@ -39,6 +39,25 @@ namespace English_exam
         }
 
         [WebMethod]
+        public bool ClientExists(string name, string lastname, int cardnumber, int phone, string email, string password)
+        {
+            DataTable dt = GetAllClients();
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr[1].ToString().Equals(name) && dr[2].ToString().Equals(lastname) && dr[3].ToString().Equals(Convert.ToString(cardnumber))
+                    && dr[4].ToString().Equals(Convert.ToString(phone)) && dr[5].ToString().Equals(email) && dr[6].ToString().Equals(password))
+                {
+                    return true;
+                }
+                
+            }
+
+            return false;
+
+        }
+
+
+        [WebMethod]
         public void AddClient(string name, string lastname, int cardnumber, int phone, string email , string password)
         {
             Client client = new Client(name,lastname,cardnumber,phone,email,password);
@@ -52,7 +71,33 @@ namespace English_exam
                 da.InsertCommand.ExecuteNonQuery();
                 conn.Close();
             }
+            /*using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Login (email, password, type, idUser) VALUES ( '"+client.email +"' , '"+ client.password +"' , 'client' , '" + client.phone +"'  )", conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }*/
         }
+
+        /*[WebMethod]
+        public void AddReservation(string name, string lastname, int cardnumber, int phone, string email, string password)
+        {
+            Client client = new Client(name, lastname, cardnumber, phone, email, password);
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ( '" + client.name + "' , '" + client.lastName + "' , '" + client.cardNumer + "' , '" + client.phone + "' , '" + client.email + "' , '" + client.password + "'  )", conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+            
+        }*/
 
         [WebMethod]
         public DataTable GetAllClients()
