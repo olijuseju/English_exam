@@ -20,6 +20,7 @@ namespace WebLogic.localhost {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Data;
     
     
     /// <remarks/>
@@ -28,6 +29,10 @@ namespace WebLogic.localhost {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="WebService1Soap", Namespace="http://tempuri.org/")]
     public partial class WebService1 : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private System.Threading.SendOrPostCallback LoginOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllClientsOperationCompleted;
         
         private System.Threading.SendOrPostCallback HelloWorldOperationCompleted;
         
@@ -70,7 +75,71 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        public event LoginCompletedEventHandler LoginCompleted;
+        
+        /// <remarks/>
+        public event GetAllClientsCompletedEventHandler GetAllClientsCompleted;
+        
+        /// <remarks/>
         public event HelloWorldCompletedEventHandler HelloWorldCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Login", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable Login(string user, string pass) {
+            object[] results = this.Invoke("Login", new object[] {
+                        user,
+                        pass});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void LoginAsync(string user, string pass) {
+            this.LoginAsync(user, pass, null);
+        }
+        
+        /// <remarks/>
+        public void LoginAsync(string user, string pass, object userState) {
+            if ((this.LoginOperationCompleted == null)) {
+                this.LoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnLoginOperationCompleted);
+            }
+            this.InvokeAsync("Login", new object[] {
+                        user,
+                        pass}, this.LoginOperationCompleted, userState);
+        }
+        
+        private void OnLoginOperationCompleted(object arg) {
+            if ((this.LoginCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.LoginCompleted(this, new LoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllClients", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllClients() {
+            object[] results = this.Invoke("GetAllClients", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllClientsAsync() {
+            this.GetAllClientsAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllClientsAsync(object userState) {
+            if ((this.GetAllClientsOperationCompleted == null)) {
+                this.GetAllClientsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllClientsOperationCompleted);
+            }
+            this.InvokeAsync("GetAllClients", new object[0], this.GetAllClientsOperationCompleted, userState);
+        }
+        
+        private void OnGetAllClientsOperationCompleted(object arg) {
+            if ((this.GetAllClientsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllClientsCompleted(this, new GetAllClientsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/HelloWorld", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -115,6 +184,58 @@ namespace WebLogic.localhost {
                 return true;
             }
             return false;
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void LoginCompletedEventHandler(object sender, LoginCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal LoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAllClientsCompletedEventHandler(object sender, GetAllClientsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllClientsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllClientsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
         }
     }
     
