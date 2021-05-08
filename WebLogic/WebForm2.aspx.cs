@@ -15,6 +15,10 @@ namespace WebLogic
             {
                 Button1.Text = Session["valor1"].ToString();
             }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)

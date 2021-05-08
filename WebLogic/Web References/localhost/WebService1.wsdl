@@ -96,6 +96,48 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetRoomById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRoomByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRoomByIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReservationByClientId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Cid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReservationByClientIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReservationByClientIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetRecepcionistById">
         <s:complexType>
           <s:sequence>
@@ -200,6 +242,18 @@
   <wsdl:message name="GetClientByIdSoapOut">
     <wsdl:part name="parameters" element="tns:GetClientByIdResponse" />
   </wsdl:message>
+  <wsdl:message name="GetRoomByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRoomById" />
+  </wsdl:message>
+  <wsdl:message name="GetRoomByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRoomByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReservationByClientIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReservationByClientId" />
+  </wsdl:message>
+  <wsdl:message name="GetReservationByClientIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReservationByClientIdResponse" />
+  </wsdl:message>
   <wsdl:message name="GetRecepcionistByIdSoapIn">
     <wsdl:part name="parameters" element="tns:GetRecepcionistById" />
   </wsdl:message>
@@ -244,6 +298,14 @@
     <wsdl:operation name="GetClientById">
       <wsdl:input message="tns:GetClientByIdSoapIn" />
       <wsdl:output message="tns:GetClientByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoomById">
+      <wsdl:input message="tns:GetRoomByIdSoapIn" />
+      <wsdl:output message="tns:GetRoomByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReservationByClientId">
+      <wsdl:input message="tns:GetReservationByClientIdSoapIn" />
+      <wsdl:output message="tns:GetReservationByClientIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetRecepcionistById">
       <wsdl:input message="tns:GetRecepcionistByIdSoapIn" />
@@ -302,6 +364,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetClientById">
       <soap:operation soapAction="http://tempuri.org/GetClientById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoomById">
+      <soap:operation soapAction="http://tempuri.org/GetRoomById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReservationByClientId">
+      <soap:operation soapAction="http://tempuri.org/GetReservationByClientId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -386,6 +466,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetClientById">
       <soap12:operation soapAction="http://tempuri.org/GetClientById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoomById">
+      <soap12:operation soapAction="http://tempuri.org/GetRoomById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReservationByClientId">
+      <soap12:operation soapAction="http://tempuri.org/GetReservationByClientId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
