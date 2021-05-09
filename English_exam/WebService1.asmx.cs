@@ -39,39 +39,79 @@ namespace English_exam
         }
 
         [WebMethod]
-        public bool ClientExists(string name, string lastname, int cardnumber, int phone, string email, string password)
+        public bool ClientExists(string name, string lastname, int cardnumber, int phone, string email, string password, int Rid)
         {
             DataTable dt = GetAllClients();
             foreach (DataRow dr in dt.Rows)
             {
                 if (dr[1].ToString().Equals(name) && dr[2].ToString().Equals(lastname) && dr[3].ToString().Equals(Convert.ToString(cardnumber))
-                    && dr[4].ToString().Equals(Convert.ToString(phone)) && dr[5].ToString().Equals(email) && dr[6].ToString().Equals(password))
+                    && dr[4].ToString().Equals(Convert.ToString(phone)) && dr[5].ToString().Equals(password) && Convert.ToInt32(dr[6]) == Rid)
                 {
                     return true;
                 }
-                
+
             }
 
             return false;
 
         }
 
+        [WebMethod]
+        public int GetIdClientExists(string name, string lastname, int cardnumber, int phone, string password, int Rid)
+        {
+            DataTable dt = GetAllClients();
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr[1].ToString().Equals(name) && dr[2].ToString().Equals(lastname) && dr[3].ToString().Equals(Convert.ToString(cardnumber))
+                    && dr[4].ToString().Equals(Convert.ToString(phone)) && dr[5].ToString().Equals(password) && Convert.ToInt32(dr[6])==Rid)
+                {
+                    return Convert.ToInt32(dr[0]);
+                }
+
+            }
+
+            return -1;
+
+        }
+
 
         [WebMethod]
-        public void AddClient(string name, string lastname, int cardnumber, int phone, string email , string password)
+        public void AddClient(string name, string lastname, int cardnumber, int phone, string password, int Rid, string email)
         {
-            Client client = new Client(name,lastname,cardnumber,phone,email,password);
+            Client client = new Client(name,lastname,cardnumber,phone,password,Rid);
             string DBpath = Server.MapPath("database/marseloDatabase.db");
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
             {
                 conn.Open();
-                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone,Email,Password) VALUES ( '"+client.name +"' , '"+ client.lastName +"' , '" + client.cardNumer + "' , '" + client.phone +"' , '" + client.email +"' , '" + client.password +"'  )", conn);
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Client (Name, Lastname, CardNumber, Phone, Password, RecepcionistId) VALUES ( '"+client.name +"' , '"+ client.lastName +"' , '" + client.cardNumer + "' , '" + client.phone +"' , '" + client.password + "' , '" + client.RecpcionistId + "'  )", conn);
                 SQLiteDataAdapter da = new SQLiteDataAdapter();
                 da.InsertCommand = comm;
                 da.InsertCommand.ExecuteNonQuery();
                 conn.Close();
             }
-            
+            int idClient= GetIdClientExists(name, password, cardnumber, phone, password, Rid);
+            if (idClient == -1)
+            {
+                return;
+            }
+            AddLogin(email, password, "client", idClient);
+        }
+
+        [WebMethod]
+        public void AddLogin(string email, string password, string type, int userId)
+        {
+            Login login = new Login(email, password, type, userId);
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Login (Email, password, type,idUser) VALUES (  '" + login.email + "' , '" + login.password + "' , '" + login.type + "' , " + login.userId+ ")", conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+
         }
 
         [WebMethod]
@@ -181,6 +221,43 @@ namespace English_exam
             return dt;
         }
 
+
+        [WebMethod]
+        public DataTable GetReservationByReceptionistId(int Rid)
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Reservation WHERE `RecepcionistId` =" + Rid, conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable GetClientByReceptionistId(int Rid)
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Client WHERE `RecepcionistId` =" + Rid, conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
         [WebMethod]
         public DataTable GetRecepcionistById(int id)
         {
@@ -236,7 +313,7 @@ namespace English_exam
             return dt;
         }
 
-                [WebMethod]
+        [WebMethod]
 
         public DataTable GetAllRoom()
         {

@@ -31,7 +31,7 @@ namespace WebLogic
                     ListBox1.Items.Add("Arrival Date: " + ReservationsTableRow["arrivalDate"]);
                     ListBox1.Items.Add("End Date: " + ReservationsTableRow["exitDate"]);
                     ListBox1.Items.Add("Room: ");
-                    DataTable RoomDataTable = webService.GetRoomById((int)ReservationsTableRow["ClientId"]);
+                    DataTable RoomDataTable = webService.GetRoomById(Convert.ToInt32(ReservationsTableRow["RoomId"]));
                     foreach (DataRow RoomTableRow in RoomDataTable.Rows)
                     {
                         ListBox1.Items.Add("Number: " + RoomTableRow["number"]);
@@ -41,7 +41,7 @@ namespace WebLogic
                     }
                     ListBox1.Items.Add("Number of people: " + ReservationsTableRow["PeopleQuantity"]);
                     ListBox1.Items.Add("Recepcionist: ");
-                    DataTable RecDataTable = webService.GetRecepcionistById((int)ReservationsTableRow["RecepcionistId"]);
+                    DataTable RecDataTable = webService.GetRecepcionistById(Convert.ToInt32(ReservationsTableRow["RecepcionistId"]));
                     foreach (DataRow RecTableRow in RecDataTable.Rows)
                     {
                         ListBox1.Items.Add("Name: " + RecTableRow["Name"] + " " + RecTableRow["LastName"]);
