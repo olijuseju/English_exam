@@ -514,6 +514,69 @@
       <s:element name="ChangeAvailableRoomResponse">
         <s:complexType />
       </s:element>
+      <s:element name="UpdateRoom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="number" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="typeRoom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="available" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="spaces" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateRoomResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateClientClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cardnumber" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="phone" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateClientClassResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="CreateReservationClass">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="clientId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="recepcionistId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="arrivalDate" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="exitDate" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="peopleQuatenty" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="roomId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateReservationClassResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExportClients">
+        <s:complexType />
+      </s:element>
+      <s:element name="ExportClientsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExportClientsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearClientList">
+        <s:complexType />
+      </s:element>
+      <s:element name="ClearClientListResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginSoapIn">
@@ -702,6 +765,36 @@
   <wsdl:message name="ChangeAvailableRoomSoapOut">
     <wsdl:part name="parameters" element="tns:ChangeAvailableRoomResponse" />
   </wsdl:message>
+  <wsdl:message name="UpdateRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateRoom" />
+  </wsdl:message>
+  <wsdl:message name="UpdateRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateClientClassSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateClientClass" />
+  </wsdl:message>
+  <wsdl:message name="CreateClientClassSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateClientClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateReservationClassSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateReservationClass" />
+  </wsdl:message>
+  <wsdl:message name="CreateReservationClassSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateReservationClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExportClientsSoapIn">
+    <wsdl:part name="parameters" element="tns:ExportClients" />
+  </wsdl:message>
+  <wsdl:message name="ExportClientsSoapOut">
+    <wsdl:part name="parameters" element="tns:ExportClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClearClientListSoapIn">
+    <wsdl:part name="parameters" element="tns:ClearClientList" />
+  </wsdl:message>
+  <wsdl:message name="ClearClientListSoapOut">
+    <wsdl:part name="parameters" element="tns:ClearClientListResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
@@ -826,6 +919,26 @@
     <wsdl:operation name="ChangeAvailableRoom">
       <wsdl:input message="tns:ChangeAvailableRoomSoapIn" />
       <wsdl:output message="tns:ChangeAvailableRoomSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRoom">
+      <wsdl:input message="tns:UpdateRoomSoapIn" />
+      <wsdl:output message="tns:UpdateRoomSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateClientClass">
+      <wsdl:input message="tns:CreateClientClassSoapIn" />
+      <wsdl:output message="tns:CreateClientClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateReservationClass">
+      <wsdl:input message="tns:CreateReservationClassSoapIn" />
+      <wsdl:output message="tns:CreateReservationClassSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportClients">
+      <wsdl:input message="tns:ExportClientsSoapIn" />
+      <wsdl:output message="tns:ExportClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearClientList">
+      <wsdl:input message="tns:ClearClientListSoapIn" />
+      <wsdl:output message="tns:ClearClientListSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -1109,6 +1222,51 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateRoom">
+      <soap:operation soapAction="http://tempuri.org/UpdateRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateClientClass">
+      <soap:operation soapAction="http://tempuri.org/CreateClientClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReservationClass">
+      <soap:operation soapAction="http://tempuri.org/CreateReservationClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportClients">
+      <soap:operation soapAction="http://tempuri.org/ExportClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearClientList">
+      <soap:operation soapAction="http://tempuri.org/ClearClientList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1384,6 +1542,51 @@
     </wsdl:operation>
     <wsdl:operation name="ChangeAvailableRoom">
       <soap12:operation soapAction="http://tempuri.org/ChangeAvailableRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRoom">
+      <soap12:operation soapAction="http://tempuri.org/UpdateRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateClientClass">
+      <soap12:operation soapAction="http://tempuri.org/CreateClientClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateReservationClass">
+      <soap12:operation soapAction="http://tempuri.org/CreateReservationClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportClients">
+      <soap12:operation soapAction="http://tempuri.org/ExportClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearClientList">
+      <soap12:operation soapAction="http://tempuri.org/ClearClientList" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

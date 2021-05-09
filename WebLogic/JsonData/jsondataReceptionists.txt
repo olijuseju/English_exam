@@ -1,0 +1,2 @@
+[{"id":1,"name":"Elver","lastName":"Gagorda","password":"1234","role":0},{"id":2,"name":"Angle","lastName":"Triangle","password":"00000","role":0},{"id":3,"name":"Elpo","lastName":"Jhon","password":"11111","role":0},{"id":4,"name":"Marselo","lastName":"Peruano","password":"777","role":1}]
+[{"id":3,"email":"example@example.com","password":"1234","type":"recepcionist","userId":1},{"id":6,"email":"marselo@admin.com","password":"777","type":"recepcionist","userId":4}]

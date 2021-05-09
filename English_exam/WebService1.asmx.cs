@@ -7,6 +7,8 @@ using System.Data;
 using System.Data.SQLite;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
+
 
 namespace English_exam
 {
@@ -20,6 +22,8 @@ namespace English_exam
     // [System.Web.Script.Services.ScriptService]
     public class WebService1 : System.Web.Services.WebService
     {
+        List<Client> clients = new List<Client>();
+
 
         [WebMethod]
         public DataTable Login(string user, string pass)
@@ -546,6 +550,48 @@ namespace English_exam
                 da.InsertCommand.ExecuteNonQuery();
                 conn.Close();
             }
+        }
+
+
+        [WebMethod]
+        public void UpdateRoom(int id,int number, string typeRoom, string name ,string available, int spaces)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Room SET Available = '" + available + "', number = "+ number + ", typeRoom = '" + typeRoom + "' , name= '" + name + "' , spaces= " + spaces +" WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void CreateClientClass(int id, string name, string lastname, int cardnumber, int phone, string password, int Rid)
+        {
+            Client client = new Client(id, name, lastname, cardnumber, phone, password, Rid);
+            clients.Add(client);
+            Console.WriteLine(clients);
+        }
+
+        [WebMethod]
+        public void CreateReservationClass( int id, int clientId, int recepcionistId, int arrivalDate, int exitDate, int peopleQuatenty, int roomId)
+        {
+            Reservation reservation = new Reservation(id, clientId, recepcionistId, arrivalDate, exitDate, peopleQuatenty, roomId);
+        }
+
+        [WebMethod]
+        public string ExportClients()
+        {
+            return JsonConvert.SerializeObject(clients[0]);
+        }
+
+        [WebMethod]
+        public void ClearClientList()
+        {
+            clients.Clear();
         }
     }
 }

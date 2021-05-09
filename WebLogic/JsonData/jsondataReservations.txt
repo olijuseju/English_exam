@@ -1,0 +1,1 @@
+[{"id":1,"clientId":1,"RecepcionistId":1,"arrivalDate":2000,"exitDate":3000,"PeopleQuantity":1,"RoomId":1},{"id":2,"clientId":1,"RecepcionistId":1,"arrivalDate":2000,"exitDate":2800,"PeopleQuantity":2,"RoomId":2}]

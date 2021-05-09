@@ -23,7 +23,6 @@ namespace WebLogic
             this.PeopleQuantity = PeopleQuantity;
             this.RoomId = RoomId;
         }
-
         public Reservation(int clientId, int RecepcionistId, int arrivalDate, int exitDate, int PeopleQuantity, int RoomId)
         {
             this.clientId = clientId;
@@ -33,6 +32,7 @@ namespace WebLogic
             this.PeopleQuantity = PeopleQuantity;
             this.RoomId = RoomId;
         }
+
         public int id { get; set; }
         public int clientId { get; set; }
         public int RecepcionistId { get; set; }
