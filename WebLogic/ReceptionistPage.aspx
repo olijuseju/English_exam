@@ -52,6 +52,8 @@
                 <asp:Button ID="Button2" runat="server" Text="Create reservation" OnClick="Button2_Click" />
 
                 <asp:ListBox ID="ListOfReservations" runat="server"></asp:ListBox>
+
+                <asp:Panel ID="TablaReservations" runat="server"></asp:Panel>
             </div>
         </div>
         
