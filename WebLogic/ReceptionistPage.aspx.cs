@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using WebLogic.localhost;
 using System.Data;
 using System.Data.SQLite;
-using System.Text;
 
 namespace WebLogic
 {
@@ -16,50 +15,24 @@ namespace WebLogic
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            WebService1 webService = new WebService1();
-            DataTable dt = webService.GetAllClients();
-            foreach (DataRow dr in dt.Rows)
+            if (Session["valor1"] != null)
             {
-                ListOfClients.Items.Add(dr[1].ToString());
+                WebService1 webService = new WebService1();
+                DataTable dt = webService.GetAllClients();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ListOfClients.Items.Add(dr[1].ToString());
+                }
+                DataTable dR = webService.GetReservationByReceptionistId(Convert.ToInt32(Session["valor1"]));
+                foreach (DataRow drR in dR.Rows)
+                {
+                    ListOfReservations.Items.Add(drR[1].ToString());
+                }
             }
-            DataTable dR = webService.GetAllReservations();
-            foreach (DataRow drR in dR.Rows)
+            else
             {
-                ListOfReservations.Items.Add(drR[1].ToString());
+                Response.Redirect("Login.aspx");
             }
-
-            StringBuilder sb = new StringBuilder();
-            sb.Append("<table class=\"table table-striped\" id=\"TablaReservations\">");
-            sb.Append("<thead class=\"thead-dark\">");
-            sb.Append("<tr>");
-            sb.Append("<th scope=\"col\">ID RESERVATION</th>");
-            sb.Append("<th scope=\"col\">Client</th>");
-            sb.Append("<th scope=\"col\">Receptionist</th>");
-            sb.Append("<th scope=\"col\">Arrival date</th>");
-            sb.Append("<th scope=\"col\">Exit date</th>");
-            sb.Append("<th scope=\"col\">Room</th>");
-            sb.Append("</tr>");
-            sb.Append("</thead>");
-            sb.Append("<tbody id=\"reservationsData\">");
-            sb.Append("<tbody id=\"reservationsData\">");
-
-            foreach (DataRow dr in dR.Rows)
-            {
-                sb.Append("<tr>");
-                sb.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
-                sb.Append("<td>" + dr[1].ToString() + "</td>");
-                sb.Append("<td>" + dr[2].ToString() + "</td>");
-                sb.Append("<td>" + dr[3].ToString() + "</td>");
-                sb.Append("<td>" + dr[4].ToString() + "</td>");
-                sb.Append("<td>" + dr[5].ToString() + "</td>");
-                sb.Append("</tr>");
-
-            }
-
-            sb.Append("</tbody>");
-            sb.Append("</table>");
-            TablaReservations.Controls.Add(new Label { Text = sb.ToString() });
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -70,14 +43,16 @@ namespace WebLogic
             {
                 if(webService.ClientExists(NameClient.Text, LastnameClient.Text, 
                     Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), 
-                    EmailClient.Text, PasswordClient.Text).Equals(true))
+                    EmailClient.Text, PasswordClient.Text, Convert.ToInt32(Session["valor1"])).Equals(true))
                 {
                     //dialog exite client
                 }
                 else
                 {
-                    webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), EmailClient.Text, PasswordClient.Text);
+                    webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text , Convert.ToInt32(Session["valor1"]), EmailClient.Text);
 
+                    int idClient = webService.GetIdClientExists(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text, Convert.ToInt32(Session["valor1"]));
+                    webService.AddLogin(EmailClient.Text, PasswordClient.Text, "client", idClient);
                 }
             }
             else

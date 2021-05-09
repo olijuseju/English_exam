@@ -89,12 +89,6 @@ namespace English_exam
                 da.InsertCommand.ExecuteNonQuery();
                 conn.Close();
             }
-            int idClient= GetIdClientExists(name, password, cardnumber, phone, password, Rid);
-            if (idClient == -1)
-            {
-                return;
-            }
-            AddLogin(email, password, "client", idClient);
         }
 
         [WebMethod]
