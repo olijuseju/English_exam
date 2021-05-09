@@ -18,107 +18,147 @@ namespace WebLogic
         private int role;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["valor1"] != null)
+            if (Page.IsPostBack != true)
             {
-                WebService1 webService = new WebService1();
-                DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
-                StringBuilder clientTable = new StringBuilder();
-                clientTable.Append("<table class=\"table table-striped\" id=\"TableClient\">");
-                clientTable.Append("<thead class=\"thead-dark\">");
-                clientTable.Append("<tr>");
-                clientTable.Append("<th scope=\"col\">Id</th>");
-                clientTable.Append("<th scope=\"col\">Name</th>");
-                clientTable.Append("<th scope=\"col\">Lastname</th>");
-                clientTable.Append("<th scope=\"col\">Cardnumber date</th>");
-                clientTable.Append("<th scope=\"col\">Phone</th>");
-                clientTable.Append("<th scope=\"col\">Password</th>");
-                clientTable.Append("<th scope=\"col\">Actions</th>");
-                clientTable.Append("</tr>");
-                clientTable.Append("</thead>");
-                clientTable.Append("<tbody id=\"ClientData\">");
-                clientTable.Append("<tbody id=\"ClientData\">");
-
-                foreach (DataRow dr in dt.Rows)
+                if (Session["valor1"] != null)
                 {
-                    clientTable.Append("<tr>");
-                    clientTable.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
-                    clientTable.Append("<td>" + dr[1].ToString() + "</td>");
-                    clientTable.Append("<td>" + dr[2].ToString() + "</td>");
-                    clientTable.Append("<td>" + dr[3].ToString() + "</td>");
-                    clientTable.Append("<td>" + dr[4].ToString() + "</td>");
-                    clientTable.Append("<td>" + dr[5].ToString() + "</td>");
-                    clientTable.Append("<td>" + "<asp:LinkButton ID = 'Workarea' Text 'qlo' onclick = 'Workarea_Click' runat = 'server'></asp:LinkButton >" + "</td>");
-                    clientTable.Append("</tr>");
-
+                    /*Button3.CssClass += " disabled ";
+                    Button3.Text = "Select a client of the list to remove";*/
+                    ListBoxClients();
+                    ListBoxReservation();
+                    isAdmin();
                 }
-
-                clientTable.Append("</tbody>");
-                clientTable.Append("</table>");
-                TablaClientOfReceptionist.Controls.Add(new Label { Text = clientTable.ToString() });
-
-                DataTable dR = webService.GetReservationByReceptionistId(Convert.ToInt32(Session["valor1"]));
-
-                StringBuilder sb = new StringBuilder();
-                sb.Append("<table class=\"table table-striped\" id=\"TableReser\">");
-                sb.Append("<thead class=\"thead-dark\">");
-                sb.Append("<tr>");
-                sb.Append("<th scope=\"col\">Id</th>");
-                sb.Append("<th scope=\"col\">Client</th>");
-                sb.Append("<th scope=\"col\">Recepcionist</th>");
-                sb.Append("<th scope=\"col\">Arrival date</th>");
-                sb.Append("<th scope=\"col\">Exit date</th>");
-                sb.Append("<th scope=\"col\">Room</th>");
-                sb.Append("<th scope=\"col\">Actions</th>");
-                sb.Append("</tr>");
-                sb.Append("</thead>");
-                sb.Append("<tbody id=\"reservationsData\">");
-                sb.Append("<tbody id=\"reservationsData\">");
-
-                foreach (DataRow dr in dR.Rows)
+                else
                 {
-                    sb.Append("<tr>");
-                    sb.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
-                    sb.Append("<td>" + dr[1].ToString() + "</td>");
-                    sb.Append("<td>" + dr[2].ToString() + "</td>");
-                    sb.Append("<td>" + dr[3].ToString() + "</td>");
-                    sb.Append("<td>" + dr[4].ToString() + "</td>");
-                    sb.Append("<td>" + dr[5].ToString() + "</td>");
-                    Button b1 = new Button();
-                    b1.Text = "button Label";
-                    b1.ID = "ButtonId";
-                    sb.Append("</tr>");
-
-                }
-
-                sb.Append("</tbody>");
-                sb.Append("</table>");
-                TablaReservations.Controls.Add(new Label { Text = sb.ToString() });
-
-                DataTable myUser = webService.GetRecepcionistById(Convert.ToInt32(Session["valor1"]));
-                foreach (DataRow dr in myUser.Rows)
-                {
-                    role = Convert.ToInt32(dr["role"]);
-                }
-
-                if (role == 1)
-                {
-                    Button5.Visible = true;
-                    Button6.Visible = true;
+                    Response.Redirect("Login.aspx");
                 }
             }
-            else
-            {
-                Response.Redirect("Login.aspx");
-            }
-
             
+        }
+
+        private void isAdmin()
+        {
+            WebService1 webService = new WebService1();
+            DataTable myUser = webService.GetRecepcionistById(Convert.ToInt32(Session["valor1"]));
+            foreach (DataRow dr in myUser.Rows)
+            {
+                role = Convert.ToInt32(dr["role"]);
+            }
+
+            if (role == 1)
+            {
+                Button5.Visible = true;
+                Button6.Visible = true;
+            }
+        }
+
+        private void ListBoxClients()
+        {
+            ListsOfClientOfRecepcionist.Items.Clear();
+            TablaClientOfReceptionist.Controls.Clear();
+            WebService1 webService = new WebService1();
+            DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
+            StringBuilder clientTable = new StringBuilder();
+            clientTable.Append("<table class=\"table table-striped\" id=\"TableClient\">");
+            clientTable.Append("<thead class=\"thead-dark\">");
+            clientTable.Append("<tr>");
+            clientTable.Append("<th scope=\"col\">Id</th>");
+            clientTable.Append("<th scope=\"col\">Name</th>");
+            clientTable.Append("<th scope=\"col\">Lastname</th>");
+            clientTable.Append("<th scope=\"col\">Cardnumber date</th>");
+            clientTable.Append("<th scope=\"col\">Phone</th>");
+            clientTable.Append("<th scope=\"col\">Password</th>");
+            clientTable.Append("<th scope=\"col\">Actions</th>");
+            clientTable.Append("</tr>");
+            clientTable.Append("</thead>");
+            clientTable.Append("<tbody id=\"ClientData\">");
+            clientTable.Append("<tbody id=\"ClientData\">");
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                clientTable.Append("<tr>");
+                clientTable.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
+                clientTable.Append("<td>" + dr[1].ToString() + "</td>");
+                clientTable.Append("<td>" + dr[2].ToString() + "</td>");
+                clientTable.Append("<td>" + dr[3].ToString() + "</td>");
+                clientTable.Append("<td>" + dr[4].ToString() + "</td>");
+                clientTable.Append("<td>" + dr[5].ToString() + "</td>");
+                clientTable.Append("<td>" + "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
+                clientTable.Append("</tr>");
+
+                ListsOfClientOfRecepcionist.Items.Add(dr[1].ToString() + " " + dr[2].ToString());
+
+            }
+
+            clientTable.Append("</tbody>");
+            clientTable.Append("</table>");
+            TablaClientOfReceptionist.Controls.Add(new Label { Text = clientTable.ToString() });
+        }
+        private void ListBoxReservation()
+        {
+            TablaReservations.Controls.Clear();
+            WebService1 webService = new WebService1();
+            DataTable dR = webService.GetReservationByReceptionistId(Convert.ToInt32(Session["valor1"]));
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<table class=\"table table-striped\" id=\"TableReser\">");
+            sb.Append("<thead class=\"thead-dark\">");
+            sb.Append("<tr>");
+            sb.Append("<th scope=\"col\">Id</th>");
+            sb.Append("<th scope=\"col\">Client</th>");
+            sb.Append("<th scope=\"col\">Recepcionist</th>");
+            sb.Append("<th scope=\"col\">Arrival date</th>");
+            sb.Append("<th scope=\"col\">Exit date</th>");
+            sb.Append("<th scope=\"col\">Room</th>");
+            sb.Append("<th scope=\"col\">Actions</th>");
+            sb.Append("</tr>");
+            sb.Append("</thead>");
+            sb.Append("<tbody id=\"reservationsData\">");
+
+
+            foreach (DataRow dr in dR.Rows)
+            {
+                sb.Append("<tr>");
+                sb.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
+                sb.Append("<td>" + dr[1].ToString() + "</td>");
+                sb.Append("<td>" + dr[2].ToString() + "</td>");
+                sb.Append("<td>" + dr[3].ToString() + "</td>");
+                sb.Append("<td>" + dr[4].ToString() + "</td>");
+                sb.Append("<td>" + dr[5].ToString() + "</td>");
+                sb.Append("<td>" + "<button type=\"button\" runat=\"server\" onserverclick=\"EditClient_Click\" class=\"btn btn-primary\" > Edit</button> " +
+                    "<button type=\"button\" runat=\"server\" onserverclick =\"EditClient_Click()\" class=\"btn btn-danger\" > Delete</button> ");
+                sb.Append("</tr>");
+            }
+
+            sb.Append("</tbody>");
+            sb.Append("</table>");
+            TablaReservations.Controls.Add(new Label { Text = sb.ToString() });
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (role != 1)
+            WebService1 webService = new WebService1();
+            if (NameClient.Text != "" && LastnameClient.Text != "" && CardNumberClient.Text != ""
+                && PhoneClient.Text != "" && EmailClient.Text != "" && PasswordClient.Text != "")
             {
+                if (webService.ClientExists(NameClient.Text, LastnameClient.Text,
+                    (int)Convert.ToInt64(CardNumberClient.Text), (int)Convert.ToInt32(PhoneClient.Text),
+                    EmailClient.Text, PasswordClient.Text, Convert.ToInt32(Session["valor1"])).Equals(true))
+                {
+                    //dialog exite client
+                }
+                else
+                {
+                    webService.AddClient(NameClient.Text, LastnameClient.Text, (int)Convert.ToInt32(CardNumberClient.Text), (int)Convert.ToInt32(PhoneClient.Text), PasswordClient.Text, Convert.ToInt32(Session["valor1"]), EmailClient.Text);
 
+                    int idClient = webService.GetIdClientExists(NameClient.Text, LastnameClient.Text, (int)Convert.ToInt32(CardNumberClient.Text), (int)Convert.ToInt32(PhoneClient.Text), PasswordClient.Text, Convert.ToInt32(Session["valor1"]));
+                    webService.AddLogin(EmailClient.Text, PasswordClient.Text, "client", idClient);
+                    ListBoxClients();
+                }
+            }
+            else
+            {
+                //dialog que esta vacio
             }
         }
 
@@ -274,6 +314,25 @@ namespace WebLogic
             webService.ClearClientList();
             TextBox1.Text = JSONObject;
             System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataRooms.txt"), JSONObject);
+        }
+
+        protected void EditClient_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
+        protected void ListsOfClientOfRecepcionist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RemoveClientButton.Text = "Remove";
+            RemoveClientButton.Enabled = true;
+
+        }
+
+        protected void RemoveClientButton_Click(object sender, EventArgs e)
+        {
+            ListsOfClientOfRecepcionist.ClearSelection();
+            RemoveClientButton.Enabled = false;
+            RemoveClientButton.Text = "Select a client of the list to remove";
         }
     }
 }
