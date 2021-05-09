@@ -382,6 +382,80 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="UpdateClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cardnumber" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="phone" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateClientResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateReceptionist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateReceptionistResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateLoginResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ChangePasswordLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePasswordLoginResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ChangePasswordClient">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePasswordClientResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="ChangePasswordReceptionist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePasswordReceptionistResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginSoapIn">
@@ -510,6 +584,42 @@
   <wsdl:message name="GetAllRoomSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllRoomResponse" />
   </wsdl:message>
+  <wsdl:message name="UpdateClientSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateClient" />
+  </wsdl:message>
+  <wsdl:message name="UpdateClientSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateReceptionistSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateReceptionist" />
+  </wsdl:message>
+  <wsdl:message name="UpdateReceptionistSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateReceptionistResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateLogin" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePasswordLogin" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePasswordLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordClientSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePasswordClient" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordClientSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePasswordClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordReceptionistSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePasswordReceptionist" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordReceptionistSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePasswordReceptionistResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
@@ -594,6 +704,30 @@
     <wsdl:operation name="GetAllRoom">
       <wsdl:input message="tns:GetAllRoomSoapIn" />
       <wsdl:output message="tns:GetAllRoomSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClient">
+      <wsdl:input message="tns:UpdateClientSoapIn" />
+      <wsdl:output message="tns:UpdateClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReceptionist">
+      <wsdl:input message="tns:UpdateReceptionistSoapIn" />
+      <wsdl:output message="tns:UpdateReceptionistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLogin">
+      <wsdl:input message="tns:UpdateLoginSoapIn" />
+      <wsdl:output message="tns:UpdateLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordLogin">
+      <wsdl:input message="tns:ChangePasswordLoginSoapIn" />
+      <wsdl:output message="tns:ChangePasswordLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordClient">
+      <wsdl:input message="tns:ChangePasswordClientSoapIn" />
+      <wsdl:output message="tns:ChangePasswordClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordReceptionist">
+      <wsdl:input message="tns:ChangePasswordReceptionistSoapIn" />
+      <wsdl:output message="tns:ChangePasswordReceptionistSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -787,6 +921,60 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="UpdateClient">
+      <soap:operation soapAction="http://tempuri.org/UpdateClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReceptionist">
+      <soap:operation soapAction="http://tempuri.org/UpdateReceptionist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLogin">
+      <soap:operation soapAction="http://tempuri.org/UpdateLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordLogin">
+      <soap:operation soapAction="http://tempuri.org/ChangePasswordLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordClient">
+      <soap:operation soapAction="http://tempuri.org/ChangePasswordClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordReceptionist">
+      <soap:operation soapAction="http://tempuri.org/ChangePasswordReceptionist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -972,6 +1160,60 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllRoom">
       <soap12:operation soapAction="http://tempuri.org/GetAllRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateClient">
+      <soap12:operation soapAction="http://tempuri.org/UpdateClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateReceptionist">
+      <soap12:operation soapAction="http://tempuri.org/UpdateReceptionist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLogin">
+      <soap12:operation soapAction="http://tempuri.org/UpdateLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordLogin">
+      <soap12:operation soapAction="http://tempuri.org/ChangePasswordLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordClient">
+      <soap12:operation soapAction="http://tempuri.org/ChangePasswordClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordReceptionist">
+      <soap12:operation soapAction="http://tempuri.org/ChangePasswordReceptionist" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
