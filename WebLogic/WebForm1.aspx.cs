@@ -25,8 +25,7 @@ namespace WebLogic
             WebService1 webService = new WebService1();
             //TextBox1.Text = webService.HelloWorld();
              
-            bool dt = webService.ClientExists("Pere", "Escopeta", 12345, 123444444, "perescopeta@gmail.com", "0000");
-            TextBox1.Text = dt.ToString();
+            
 
             /*foreach (DataRow dr in dt.Rows)
             {

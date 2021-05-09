@@ -34,7 +34,11 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback ClientExistsOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetIdClientExistsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback AddClientOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback AddLoginOperationCompleted;
         
         private System.Threading.SendOrPostCallback ReservationExistsOperationCompleted;
         
@@ -47,6 +51,10 @@ namespace WebLogic.localhost {
         private System.Threading.SendOrPostCallback GetRoomByIdOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetReservationByClientIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetReservationByReceptionistIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetClientByReceptionistIdOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetRecepcionistByIdOperationCompleted;
         
@@ -101,7 +109,13 @@ namespace WebLogic.localhost {
         public event ClientExistsCompletedEventHandler ClientExistsCompleted;
         
         /// <remarks/>
+        public event GetIdClientExistsCompletedEventHandler GetIdClientExistsCompleted;
+        
+        /// <remarks/>
         public event AddClientCompletedEventHandler AddClientCompleted;
+        
+        /// <remarks/>
+        public event AddLoginCompletedEventHandler AddLoginCompleted;
         
         /// <remarks/>
         public event ReservationExistsCompletedEventHandler ReservationExistsCompleted;
@@ -120,6 +134,12 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         public event GetReservationByClientIdCompletedEventHandler GetReservationByClientIdCompleted;
+        
+        /// <remarks/>
+        public event GetReservationByReceptionistIdCompletedEventHandler GetReservationByReceptionistIdCompleted;
+        
+        /// <remarks/>
+        public event GetClientByReceptionistIdCompletedEventHandler GetClientByReceptionistIdCompleted;
         
         /// <remarks/>
         public event GetRecepcionistByIdCompletedEventHandler GetRecepcionistByIdCompleted;
@@ -166,24 +186,25 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ClientExists", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public bool ClientExists(string name, string lastname, int cardnumber, int phone, string email, string password) {
+        public bool ClientExists(string name, string lastname, int cardnumber, int phone, string email, string password, int Rid) {
             object[] results = this.Invoke("ClientExists", new object[] {
                         name,
                         lastname,
                         cardnumber,
                         phone,
                         email,
-                        password});
+                        password,
+                        Rid});
             return ((bool)(results[0]));
         }
         
         /// <remarks/>
-        public void ClientExistsAsync(string name, string lastname, int cardnumber, int phone, string email, string password) {
-            this.ClientExistsAsync(name, lastname, cardnumber, phone, email, password, null);
+        public void ClientExistsAsync(string name, string lastname, int cardnumber, int phone, string email, string password, int Rid) {
+            this.ClientExistsAsync(name, lastname, cardnumber, phone, email, password, Rid, null);
         }
         
         /// <remarks/>
-        public void ClientExistsAsync(string name, string lastname, int cardnumber, int phone, string email, string password, object userState) {
+        public void ClientExistsAsync(string name, string lastname, int cardnumber, int phone, string email, string password, int Rid, object userState) {
             if ((this.ClientExistsOperationCompleted == null)) {
                 this.ClientExistsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnClientExistsOperationCompleted);
             }
@@ -193,7 +214,8 @@ namespace WebLogic.localhost {
                         cardnumber,
                         phone,
                         email,
-                        password}, this.ClientExistsOperationCompleted, userState);
+                        password,
+                        Rid}, this.ClientExistsOperationCompleted, userState);
         }
         
         private void OnClientExistsOperationCompleted(object arg) {
@@ -204,24 +226,64 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetIdClientExists", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int GetIdClientExists(string name, string lastname, int cardnumber, int phone, string password, int Rid) {
+            object[] results = this.Invoke("GetIdClientExists", new object[] {
+                        name,
+                        lastname,
+                        cardnumber,
+                        phone,
+                        password,
+                        Rid});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetIdClientExistsAsync(string name, string lastname, int cardnumber, int phone, string password, int Rid) {
+            this.GetIdClientExistsAsync(name, lastname, cardnumber, phone, password, Rid, null);
+        }
+        
+        /// <remarks/>
+        public void GetIdClientExistsAsync(string name, string lastname, int cardnumber, int phone, string password, int Rid, object userState) {
+            if ((this.GetIdClientExistsOperationCompleted == null)) {
+                this.GetIdClientExistsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetIdClientExistsOperationCompleted);
+            }
+            this.InvokeAsync("GetIdClientExists", new object[] {
+                        name,
+                        lastname,
+                        cardnumber,
+                        phone,
+                        password,
+                        Rid}, this.GetIdClientExistsOperationCompleted, userState);
+        }
+        
+        private void OnGetIdClientExistsOperationCompleted(object arg) {
+            if ((this.GetIdClientExistsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetIdClientExistsCompleted(this, new GetIdClientExistsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void AddClient(string name, string lastname, int cardnumber, int phone, string email, string password) {
+        public void AddClient(string name, string lastname, int cardnumber, int phone, string password, int Rid, string email) {
             this.Invoke("AddClient", new object[] {
                         name,
                         lastname,
                         cardnumber,
                         phone,
-                        email,
-                        password});
+                        password,
+                        Rid,
+                        email});
         }
         
         /// <remarks/>
-        public void AddClientAsync(string name, string lastname, int cardnumber, int phone, string email, string password) {
-            this.AddClientAsync(name, lastname, cardnumber, phone, email, password, null);
+        public void AddClientAsync(string name, string lastname, int cardnumber, int phone, string password, int Rid, string email) {
+            this.AddClientAsync(name, lastname, cardnumber, phone, password, Rid, email, null);
         }
         
         /// <remarks/>
-        public void AddClientAsync(string name, string lastname, int cardnumber, int phone, string email, string password, object userState) {
+        public void AddClientAsync(string name, string lastname, int cardnumber, int phone, string password, int Rid, string email, object userState) {
             if ((this.AddClientOperationCompleted == null)) {
                 this.AddClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddClientOperationCompleted);
             }
@@ -230,14 +292,49 @@ namespace WebLogic.localhost {
                         lastname,
                         cardnumber,
                         phone,
-                        email,
-                        password}, this.AddClientOperationCompleted, userState);
+                        password,
+                        Rid,
+                        email}, this.AddClientOperationCompleted, userState);
         }
         
         private void OnAddClientOperationCompleted(object arg) {
             if ((this.AddClientCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddLogin(string email, string password, string type, int userId) {
+            this.Invoke("AddLogin", new object[] {
+                        email,
+                        password,
+                        type,
+                        userId});
+        }
+        
+        /// <remarks/>
+        public void AddLoginAsync(string email, string password, string type, int userId) {
+            this.AddLoginAsync(email, password, type, userId, null);
+        }
+        
+        /// <remarks/>
+        public void AddLoginAsync(string email, string password, string type, int userId, object userState) {
+            if ((this.AddLoginOperationCompleted == null)) {
+                this.AddLoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddLoginOperationCompleted);
+            }
+            this.InvokeAsync("AddLogin", new object[] {
+                        email,
+                        password,
+                        type,
+                        userId}, this.AddLoginOperationCompleted, userState);
+        }
+        
+        private void OnAddLoginOperationCompleted(object arg) {
+            if ((this.AddLoginCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddLoginCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -433,6 +530,64 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetReservationByReceptionistId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetReservationByReceptionistId(int Rid) {
+            object[] results = this.Invoke("GetReservationByReceptionistId", new object[] {
+                        Rid});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetReservationByReceptionistIdAsync(int Rid) {
+            this.GetReservationByReceptionistIdAsync(Rid, null);
+        }
+        
+        /// <remarks/>
+        public void GetReservationByReceptionistIdAsync(int Rid, object userState) {
+            if ((this.GetReservationByReceptionistIdOperationCompleted == null)) {
+                this.GetReservationByReceptionistIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetReservationByReceptionistIdOperationCompleted);
+            }
+            this.InvokeAsync("GetReservationByReceptionistId", new object[] {
+                        Rid}, this.GetReservationByReceptionistIdOperationCompleted, userState);
+        }
+        
+        private void OnGetReservationByReceptionistIdOperationCompleted(object arg) {
+            if ((this.GetReservationByReceptionistIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetReservationByReceptionistIdCompleted(this, new GetReservationByReceptionistIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetClientByReceptionistId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetClientByReceptionistId(int Rid) {
+            object[] results = this.Invoke("GetClientByReceptionistId", new object[] {
+                        Rid});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetClientByReceptionistIdAsync(int Rid) {
+            this.GetClientByReceptionistIdAsync(Rid, null);
+        }
+        
+        /// <remarks/>
+        public void GetClientByReceptionistIdAsync(int Rid, object userState) {
+            if ((this.GetClientByReceptionistIdOperationCompleted == null)) {
+                this.GetClientByReceptionistIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetClientByReceptionistIdOperationCompleted);
+            }
+            this.InvokeAsync("GetClientByReceptionistId", new object[] {
+                        Rid}, this.GetClientByReceptionistIdOperationCompleted, userState);
+        }
+        
+        private void OnGetClientByReceptionistIdOperationCompleted(object arg) {
+            if ((this.GetClientByReceptionistIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetClientByReceptionistIdCompleted(this, new GetClientByReceptionistIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetRecepcionistById", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public System.Data.DataTable GetRecepcionistById(int id) {
             object[] results = this.Invoke("GetRecepcionistById", new object[] {
@@ -615,7 +770,37 @@ namespace WebLogic.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetIdClientExistsCompletedEventHandler(object sender, GetIdClientExistsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetIdClientExistsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetIdClientExistsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void AddClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddLoginCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
@@ -738,6 +923,58 @@ namespace WebLogic.localhost {
         private object[] results;
         
         internal GetReservationByClientIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetReservationByReceptionistIdCompletedEventHandler(object sender, GetReservationByReceptionistIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetReservationByReceptionistIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetReservationByReceptionistIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetClientByReceptionistIdCompletedEventHandler(object sender, GetClientByReceptionistIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetClientByReceptionistIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetClientByReceptionistIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

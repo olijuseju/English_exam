@@ -33,6 +33,7 @@
             <s:element minOccurs="1" maxOccurs="1" name="phone" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rid" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -43,6 +44,25 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetIdClientExists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cardnumber" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="phone" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIdClientExistsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetIdClientExistsResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="AddClient">
         <s:complexType>
           <s:sequence>
@@ -50,12 +70,26 @@
             <s:element minOccurs="0" maxOccurs="1" name="lastname" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="cardnumber" type="s:int" />
             <s:element minOccurs="1" maxOccurs="1" name="phone" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Rid" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
       <s:element name="AddClientResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="AddLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="type" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddLoginResponse">
         <s:complexType />
       </s:element>
       <s:element name="ReservationExists">
@@ -172,6 +206,48 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetReservationByReceptionistId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Rid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReservationByReceptionistIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReservationByReceptionistIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientByReceptionistId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Rid" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientByReceptionistIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientByReceptionistIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="GetRecepcionistById">
         <s:complexType>
           <s:sequence>
@@ -258,11 +334,23 @@
   <wsdl:message name="ClientExistsSoapOut">
     <wsdl:part name="parameters" element="tns:ClientExistsResponse" />
   </wsdl:message>
+  <wsdl:message name="GetIdClientExistsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIdClientExists" />
+  </wsdl:message>
+  <wsdl:message name="GetIdClientExistsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIdClientExistsResponse" />
+  </wsdl:message>
   <wsdl:message name="AddClientSoapIn">
     <wsdl:part name="parameters" element="tns:AddClient" />
   </wsdl:message>
   <wsdl:message name="AddClientSoapOut">
     <wsdl:part name="parameters" element="tns:AddClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:AddLogin" />
+  </wsdl:message>
+  <wsdl:message name="AddLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:AddLoginResponse" />
   </wsdl:message>
   <wsdl:message name="ReservationExistsSoapIn">
     <wsdl:part name="parameters" element="tns:ReservationExists" />
@@ -300,6 +388,18 @@
   <wsdl:message name="GetReservationByClientIdSoapOut">
     <wsdl:part name="parameters" element="tns:GetReservationByClientIdResponse" />
   </wsdl:message>
+  <wsdl:message name="GetReservationByReceptionistIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReservationByReceptionistId" />
+  </wsdl:message>
+  <wsdl:message name="GetReservationByReceptionistIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReservationByReceptionistIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientByReceptionistIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientByReceptionistId" />
+  </wsdl:message>
+  <wsdl:message name="GetClientByReceptionistIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientByReceptionistIdResponse" />
+  </wsdl:message>
   <wsdl:message name="GetRecepcionistByIdSoapIn">
     <wsdl:part name="parameters" element="tns:GetRecepcionistById" />
   </wsdl:message>
@@ -333,9 +433,17 @@
       <wsdl:input message="tns:ClientExistsSoapIn" />
       <wsdl:output message="tns:ClientExistsSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetIdClientExists">
+      <wsdl:input message="tns:GetIdClientExistsSoapIn" />
+      <wsdl:output message="tns:GetIdClientExistsSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddClient">
       <wsdl:input message="tns:AddClientSoapIn" />
       <wsdl:output message="tns:AddClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddLogin">
+      <wsdl:input message="tns:AddLoginSoapIn" />
+      <wsdl:output message="tns:AddLoginSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="ReservationExists">
       <wsdl:input message="tns:ReservationExistsSoapIn" />
@@ -360,6 +468,14 @@
     <wsdl:operation name="GetReservationByClientId">
       <wsdl:input message="tns:GetReservationByClientIdSoapIn" />
       <wsdl:output message="tns:GetReservationByClientIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReservationByReceptionistId">
+      <wsdl:input message="tns:GetReservationByReceptionistIdSoapIn" />
+      <wsdl:output message="tns:GetReservationByReceptionistIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientByReceptionistId">
+      <wsdl:input message="tns:GetClientByReceptionistIdSoapIn" />
+      <wsdl:output message="tns:GetClientByReceptionistIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetRecepcionistById">
       <wsdl:input message="tns:GetRecepcionistByIdSoapIn" />
@@ -398,8 +514,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetIdClientExists">
+      <soap:operation soapAction="http://tempuri.org/GetIdClientExists" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddClient">
       <soap:operation soapAction="http://tempuri.org/AddClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLogin">
+      <soap:operation soapAction="http://tempuri.org/AddLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -454,6 +588,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetReservationByClientId">
       <soap:operation soapAction="http://tempuri.org/GetReservationByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReservationByReceptionistId">
+      <soap:operation soapAction="http://tempuri.org/GetReservationByReceptionistId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientByReceptionistId">
+      <soap:operation soapAction="http://tempuri.org/GetClientByReceptionistId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -518,8 +670,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetIdClientExists">
+      <soap12:operation soapAction="http://tempuri.org/GetIdClientExists" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddClient">
       <soap12:operation soapAction="http://tempuri.org/AddClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddLogin">
+      <soap12:operation soapAction="http://tempuri.org/AddLogin" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -574,6 +744,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetReservationByClientId">
       <soap12:operation soapAction="http://tempuri.org/GetReservationByClientId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReservationByReceptionistId">
+      <soap12:operation soapAction="http://tempuri.org/GetReservationByReceptionistId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientByReceptionistId">
+      <soap12:operation soapAction="http://tempuri.org/GetClientByReceptionistId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

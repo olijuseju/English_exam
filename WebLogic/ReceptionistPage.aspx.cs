@@ -15,18 +15,24 @@ namespace WebLogic
        
         protected void Page_Load(object sender, EventArgs e)
         {
-            WebService1 webService = new WebService1();
-            DataTable dt = webService.GetAllClients();
-            foreach (DataRow dr in dt.Rows)
+            if (Session["valor1"] != null)
             {
-                ListOfClients.Items.Add(dr[1].ToString());
+                WebService1 webService = new WebService1();
+                DataTable dt = webService.GetAllClients();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ListOfClients.Items.Add(dr[1].ToString());
+                }
+                DataTable dR = webService.GetReservationByReceptionistId(Convert.ToInt32(Session["valor1"]));
+                foreach (DataRow drR in dR.Rows)
+                {
+                    ListOfReservations.Items.Add(drR[1].ToString());
+                }
             }
-            DataTable dR = webService.GetAllReservations();
-            foreach (DataRow drR in dR.Rows)
+            else
             {
-                ListOfReservations.Items.Add(drR[1].ToString());
+                Response.Redirect("Login.aspx");
             }
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -37,14 +43,13 @@ namespace WebLogic
             {
                 if(webService.ClientExists(NameClient.Text, LastnameClient.Text, 
                     Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), 
-                    EmailClient.Text, PasswordClient.Text).Equals(true))
+                    EmailClient.Text, PasswordClient.Text, Convert.ToInt32(Session["valor1"])).Equals(true))
                 {
                     //dialog exite client
                 }
                 else
                 {
-                    webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), EmailClient.Text, PasswordClient.Text);
-
+                    webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text , Convert.ToInt32(Session["valor1"]), EmailClient.Text);
                 }
             }
             else
