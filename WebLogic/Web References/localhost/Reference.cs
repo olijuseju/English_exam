@@ -38,6 +38,10 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback AddClientOperationCompleted;
         
+        private System.Threading.SendOrPostCallback RemoveClientbyIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback RemoveLoginbyIdOperationCompleted;
+        
         private System.Threading.SendOrPostCallback AddLoginOperationCompleted;
         
         private System.Threading.SendOrPostCallback ReservationExistsOperationCompleted;
@@ -45,6 +49,10 @@ namespace WebLogic.localhost {
         private System.Threading.SendOrPostCallback AddReservationOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetAllClientsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetLoginByClientIdOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetLoginByReceptionistIdOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetClientByIdOperationCompleted;
         
@@ -115,6 +123,12 @@ namespace WebLogic.localhost {
         public event AddClientCompletedEventHandler AddClientCompleted;
         
         /// <remarks/>
+        public event RemoveClientbyIdCompletedEventHandler RemoveClientbyIdCompleted;
+        
+        /// <remarks/>
+        public event RemoveLoginbyIdCompletedEventHandler RemoveLoginbyIdCompleted;
+        
+        /// <remarks/>
         public event AddLoginCompletedEventHandler AddLoginCompleted;
         
         /// <remarks/>
@@ -125,6 +139,12 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         public event GetAllClientsCompletedEventHandler GetAllClientsCompleted;
+        
+        /// <remarks/>
+        public event GetLoginByClientIdCompletedEventHandler GetLoginByClientIdCompleted;
+        
+        /// <remarks/>
+        public event GetLoginByReceptionistIdCompletedEventHandler GetLoginByReceptionistIdCompleted;
         
         /// <remarks/>
         public event GetClientByIdCompletedEventHandler GetClientByIdCompleted;
@@ -305,6 +325,62 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoveClientbyId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoveClientbyId(int id) {
+            this.Invoke("RemoveClientbyId", new object[] {
+                        id});
+        }
+        
+        /// <remarks/>
+        public void RemoveClientbyIdAsync(int id) {
+            this.RemoveClientbyIdAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveClientbyIdAsync(int id, object userState) {
+            if ((this.RemoveClientbyIdOperationCompleted == null)) {
+                this.RemoveClientbyIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveClientbyIdOperationCompleted);
+            }
+            this.InvokeAsync("RemoveClientbyId", new object[] {
+                        id}, this.RemoveClientbyIdOperationCompleted, userState);
+        }
+        
+        private void OnRemoveClientbyIdOperationCompleted(object arg) {
+            if ((this.RemoveClientbyIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveClientbyIdCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/RemoveLoginbyId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void RemoveLoginbyId(int id) {
+            this.Invoke("RemoveLoginbyId", new object[] {
+                        id});
+        }
+        
+        /// <remarks/>
+        public void RemoveLoginbyIdAsync(int id) {
+            this.RemoveLoginbyIdAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void RemoveLoginbyIdAsync(int id, object userState) {
+            if ((this.RemoveLoginbyIdOperationCompleted == null)) {
+                this.RemoveLoginbyIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnRemoveLoginbyIdOperationCompleted);
+            }
+            this.InvokeAsync("RemoveLoginbyId", new object[] {
+                        id}, this.RemoveLoginbyIdOperationCompleted, userState);
+        }
+        
+        private void OnRemoveLoginbyIdOperationCompleted(object arg) {
+            if ((this.RemoveLoginbyIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.RemoveLoginbyIdCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void AddLogin(string email, string password, string type, int userId) {
             this.Invoke("AddLogin", new object[] {
@@ -439,6 +515,64 @@ namespace WebLogic.localhost {
             if ((this.GetAllClientsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetAllClientsCompleted(this, new GetAllClientsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetLoginByClientId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetLoginByClientId(int id) {
+            object[] results = this.Invoke("GetLoginByClientId", new object[] {
+                        id});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetLoginByClientIdAsync(int id) {
+            this.GetLoginByClientIdAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void GetLoginByClientIdAsync(int id, object userState) {
+            if ((this.GetLoginByClientIdOperationCompleted == null)) {
+                this.GetLoginByClientIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetLoginByClientIdOperationCompleted);
+            }
+            this.InvokeAsync("GetLoginByClientId", new object[] {
+                        id}, this.GetLoginByClientIdOperationCompleted, userState);
+        }
+        
+        private void OnGetLoginByClientIdOperationCompleted(object arg) {
+            if ((this.GetLoginByClientIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetLoginByClientIdCompleted(this, new GetLoginByClientIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetLoginByReceptionistId", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetLoginByReceptionistId(int id) {
+            object[] results = this.Invoke("GetLoginByReceptionistId", new object[] {
+                        id});
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetLoginByReceptionistIdAsync(int id) {
+            this.GetLoginByReceptionistIdAsync(id, null);
+        }
+        
+        /// <remarks/>
+        public void GetLoginByReceptionistIdAsync(int id, object userState) {
+            if ((this.GetLoginByReceptionistIdOperationCompleted == null)) {
+                this.GetLoginByReceptionistIdOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetLoginByReceptionistIdOperationCompleted);
+            }
+            this.InvokeAsync("GetLoginByReceptionistId", new object[] {
+                        id}, this.GetLoginByReceptionistIdOperationCompleted, userState);
+        }
+        
+        private void OnGetLoginByReceptionistIdOperationCompleted(object arg) {
+            if ((this.GetLoginByReceptionistIdCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetLoginByReceptionistIdCompleted(this, new GetLoginByReceptionistIdCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -800,6 +934,14 @@ namespace WebLogic.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void RemoveClientbyIdCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void RemoveLoginbyIdCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void AddLoginCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
@@ -845,6 +987,58 @@ namespace WebLogic.localhost {
         private object[] results;
         
         internal GetAllClientsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetLoginByClientIdCompletedEventHandler(object sender, GetLoginByClientIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetLoginByClientIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetLoginByClientIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetLoginByReceptionistIdCompletedEventHandler(object sender, GetLoginByReceptionistIdCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetLoginByReceptionistIdCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetLoginByReceptionistIdCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

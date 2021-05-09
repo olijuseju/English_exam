@@ -79,6 +79,26 @@
       <s:element name="AddClientResponse">
         <s:complexType />
       </s:element>
+      <s:element name="RemoveClientbyId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveClientbyIdResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="RemoveLoginbyId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveLoginbyIdResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="AddLogin">
         <s:complexType>
           <s:sequence>
@@ -133,6 +153,48 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="GetAllClientsResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginByClientId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginByClientIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLoginByClientIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginByReceptionistId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLoginByReceptionistIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetLoginByReceptionistIdResult">
               <s:complexType>
                 <s:sequence>
                   <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
@@ -346,6 +408,18 @@
   <wsdl:message name="AddClientSoapOut">
     <wsdl:part name="parameters" element="tns:AddClientResponse" />
   </wsdl:message>
+  <wsdl:message name="RemoveClientbyIdSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveClientbyId" />
+  </wsdl:message>
+  <wsdl:message name="RemoveClientbyIdSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveClientbyIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLoginbyIdSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveLoginbyId" />
+  </wsdl:message>
+  <wsdl:message name="RemoveLoginbyIdSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveLoginbyIdResponse" />
+  </wsdl:message>
   <wsdl:message name="AddLoginSoapIn">
     <wsdl:part name="parameters" element="tns:AddLogin" />
   </wsdl:message>
@@ -369,6 +443,18 @@
   </wsdl:message>
   <wsdl:message name="GetAllClientsSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllClientsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginByClientIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLoginByClientId" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginByClientIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoginByClientIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginByReceptionistIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLoginByReceptionistId" />
+  </wsdl:message>
+  <wsdl:message name="GetLoginByReceptionistIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLoginByReceptionistIdResponse" />
   </wsdl:message>
   <wsdl:message name="GetClientByIdSoapIn">
     <wsdl:part name="parameters" element="tns:GetClientById" />
@@ -441,6 +527,14 @@
       <wsdl:input message="tns:AddClientSoapIn" />
       <wsdl:output message="tns:AddClientSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="RemoveClientbyId">
+      <wsdl:input message="tns:RemoveClientbyIdSoapIn" />
+      <wsdl:output message="tns:RemoveClientbyIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLoginbyId">
+      <wsdl:input message="tns:RemoveLoginbyIdSoapIn" />
+      <wsdl:output message="tns:RemoveLoginbyIdSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="AddLogin">
       <wsdl:input message="tns:AddLoginSoapIn" />
       <wsdl:output message="tns:AddLoginSoapOut" />
@@ -456,6 +550,14 @@
     <wsdl:operation name="GetAllClients">
       <wsdl:input message="tns:GetAllClientsSoapIn" />
       <wsdl:output message="tns:GetAllClientsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByClientId">
+      <wsdl:input message="tns:GetLoginByClientIdSoapIn" />
+      <wsdl:output message="tns:GetLoginByClientIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByReceptionistId">
+      <wsdl:input message="tns:GetLoginByReceptionistIdSoapIn" />
+      <wsdl:output message="tns:GetLoginByReceptionistIdSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetClientById">
       <wsdl:input message="tns:GetClientByIdSoapIn" />
@@ -532,6 +634,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RemoveClientbyId">
+      <soap:operation soapAction="http://tempuri.org/RemoveClientbyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLoginbyId">
+      <soap:operation soapAction="http://tempuri.org/RemoveLoginbyId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddLogin">
       <soap:operation soapAction="http://tempuri.org/AddLogin" style="document" />
       <wsdl:input>
@@ -561,6 +681,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllClients">
       <soap:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByClientId">
+      <soap:operation soapAction="http://tempuri.org/GetLoginByClientId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByReceptionistId">
+      <soap:operation soapAction="http://tempuri.org/GetLoginByReceptionistId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -688,6 +826,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RemoveClientbyId">
+      <soap12:operation soapAction="http://tempuri.org/RemoveClientbyId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveLoginbyId">
+      <soap12:operation soapAction="http://tempuri.org/RemoveLoginbyId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AddLogin">
       <soap12:operation soapAction="http://tempuri.org/AddLogin" style="document" />
       <wsdl:input>
@@ -717,6 +873,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllClients">
       <soap12:operation soapAction="http://tempuri.org/GetAllClients" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByClientId">
+      <soap12:operation soapAction="http://tempuri.org/GetLoginByClientId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLoginByReceptionistId">
+      <soap12:operation soapAction="http://tempuri.org/GetLoginByReceptionistId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using WebLogic.localhost;
 using System.Data;
 using System.Data.SQLite;
+using System.Text;
 
 namespace WebLogic
 {
@@ -18,21 +19,83 @@ namespace WebLogic
             if (Session["valor1"] != null)
             {
                 WebService1 webService = new WebService1();
-                DataTable dt = webService.GetAllClients();
+                DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
+                StringBuilder clientTable = new StringBuilder();
+                clientTable.Append("<table class=\"table table-striped\" id=\"TableClient\">");
+                clientTable.Append("<thead class=\"thead-dark\">");
+                clientTable.Append("<tr>");
+                clientTable.Append("<th scope=\"col\">Id</th>");
+                clientTable.Append("<th scope=\"col\">Name</th>");
+                clientTable.Append("<th scope=\"col\">Lastname</th>");
+                clientTable.Append("<th scope=\"col\">Cardnumber date</th>");
+                clientTable.Append("<th scope=\"col\">Phone</th>");
+                clientTable.Append("<th scope=\"col\">Password</th>");
+                clientTable.Append("<th scope=\"col\">Actions</th>");
+                clientTable.Append("</tr>");
+                clientTable.Append("</thead>");
+                clientTable.Append("<tbody id=\"ClientData\">");
+                clientTable.Append("<tbody id=\"ClientData\">");
+
                 foreach (DataRow dr in dt.Rows)
                 {
-                    ListOfClients.Items.Add(dr[1].ToString());
+                    clientTable.Append("<tr>");
+                    clientTable.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
+                    clientTable.Append("<td>" + dr[1].ToString() + "</td>");
+                    clientTable.Append("<td>" + dr[2].ToString() + "</td>");
+                    clientTable.Append("<td>" + dr[3].ToString() + "</td>");
+                    clientTable.Append("<td>" + dr[4].ToString() + "</td>");
+                    clientTable.Append("<td>" + dr[5].ToString() + "</td>");
+                    clientTable.Append("<td>" + "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
+                    clientTable.Append("</tr>");
+
                 }
+
+                clientTable.Append("</tbody>");
+                clientTable.Append("</table>");
+                TablaClientOfReceptionist.Controls.Add(new Label { Text = clientTable.ToString() });
+
                 DataTable dR = webService.GetReservationByReceptionistId(Convert.ToInt32(Session["valor1"]));
-                foreach (DataRow drR in dR.Rows)
+
+                StringBuilder sb = new StringBuilder();
+                sb.Append("<table class=\"table table-striped\" id=\"TableReser\">");
+                sb.Append("<thead class=\"thead-dark\">");
+                sb.Append("<tr>");
+                sb.Append("<th scope=\"col\">Id</th>");
+                sb.Append("<th scope=\"col\">Client</th>");
+                sb.Append("<th scope=\"col\">Recepcionist</th>");
+                sb.Append("<th scope=\"col\">Arrival date</th>");
+                sb.Append("<th scope=\"col\">Exit date</th>");
+                sb.Append("<th scope=\"col\">Room</th>");
+                sb.Append("<th scope=\"col\">Actions</th>");
+                sb.Append("</tr>");
+                sb.Append("</thead>");
+                sb.Append("<tbody id=\"reservationsData\">");
+                sb.Append("<tbody id=\"reservationsData\">");
+
+                foreach (DataRow dr in dR.Rows)
                 {
-                    ListOfReservations.Items.Add(drR[1].ToString());
+                    sb.Append("<tr>");
+                    sb.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
+                    sb.Append("<td>" + dr[1].ToString() + "</td>");
+                    sb.Append("<td>" + dr[2].ToString() + "</td>");
+                    sb.Append("<td>" + dr[3].ToString() + "</td>");
+                    sb.Append("<td>" + dr[4].ToString() + "</td>");
+                    sb.Append("<td>" + dr[5].ToString() + "</td>");
+                    sb.Append("<td>"+ "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
+                    sb.Append("</tr>");
+
                 }
+
+                sb.Append("</tbody>");
+                sb.Append("</table>");
+                TablaReservations.Controls.Add(new Label { Text = sb.ToString() });
             }
             else
             {
                 Response.Redirect("Login.aspx");
             }
+
+            
         }
 
         protected void Button1_Click(object sender, EventArgs e)

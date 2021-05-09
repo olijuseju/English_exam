@@ -92,6 +92,36 @@ namespace English_exam
         }
 
         [WebMethod]
+        public void RemoveClientbyId(int id)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("DELETE FROM Client WHERE id =" +  id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void RemoveLoginbyId(int id)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("DELETE FROM Login WHERE id =" + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
         public void AddLogin(string email, string password, string type, int userId)
         {
             Login login = new Login(email, password, type, userId);
@@ -158,6 +188,42 @@ namespace English_exam
                     dt.Load(reader);
                     conn.Close();
                 }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable GetLoginByClientId(int id)
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Login WHERE `idUser` =" + id + " AND `type` = 'client'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable GetLoginByReceptionistId(int id)
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Login WHERE `idUser` =" + id + " AND `type` = 'recepcionist'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
             return dt;
         }
 

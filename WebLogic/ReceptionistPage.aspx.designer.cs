@@ -87,13 +87,13 @@ namespace WebLogic
         protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control ListOfClients.
+        /// Control TablaClientOfReceptionist.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListOfClients;
+        protected global::System.Web.UI.WebControls.Panel TablaClientOfReceptionist;
 
         /// <summary>
         /// Control CliendIdReservation.
@@ -148,15 +148,6 @@ namespace WebLogic
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
-
-        /// <summary>
-        /// Control ListOfReservations.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListOfReservations;
 
         /// <summary>
         /// Control TablaReservations.
