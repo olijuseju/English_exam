@@ -391,5 +391,96 @@ namespace English_exam
             }
             return dt;
         }
+
+
+        [WebMethod]
+        public void UpdateClient(int id, string name, string lastname, int cardnumber, int phone, string password, string email)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Client SET name = '" + name + "'," + " lastname = '" + lastname + "'," + " cardnumber = " + cardnumber + ", " + " phone = " + phone + ", " + "password = '" + password + "'" + " WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void UpdateReceptionist(int id, string name, string lastname, string password)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Receptionist SET name = '" + name + "'," + " lastname = '" + lastname + "'," + " password = '" + password + "'" + " WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void UpdateLogin(int id, string email, string password)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Login SET email = '" + email + "'," + " password = '" + password + "' WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void ChangePasswordLogin(int id, string password)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Login SET password = '" + password +"' WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void ChangePasswordClient(int id, string password)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Client SET password = '" + password + "' WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void ChangePasswordReceptionist(int id, string password)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Receptionist SET password = '" + password + "' WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
     }
 }

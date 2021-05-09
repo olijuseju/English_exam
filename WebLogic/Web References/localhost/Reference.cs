@@ -72,6 +72,18 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback GetAllRoomOperationCompleted;
         
+        private System.Threading.SendOrPostCallback UpdateClientOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateReceptionistOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback UpdateLoginOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ChangePasswordLoginOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ChangePasswordClientOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ChangePasswordReceptionistOperationCompleted;
+        
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
@@ -172,6 +184,24 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         public event GetAllRoomCompletedEventHandler GetAllRoomCompleted;
+        
+        /// <remarks/>
+        public event UpdateClientCompletedEventHandler UpdateClientCompleted;
+        
+        /// <remarks/>
+        public event UpdateReceptionistCompletedEventHandler UpdateReceptionistCompleted;
+        
+        /// <remarks/>
+        public event UpdateLoginCompletedEventHandler UpdateLoginCompleted;
+        
+        /// <remarks/>
+        public event ChangePasswordLoginCompletedEventHandler ChangePasswordLoginCompleted;
+        
+        /// <remarks/>
+        public event ChangePasswordClientCompletedEventHandler ChangePasswordClientCompleted;
+        
+        /// <remarks/>
+        public event ChangePasswordReceptionistCompletedEventHandler ChangePasswordReceptionistCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Login", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -832,6 +862,202 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateClient(int id, string name, string lastname, int cardnumber, int phone, string password, string email) {
+            this.Invoke("UpdateClient", new object[] {
+                        id,
+                        name,
+                        lastname,
+                        cardnumber,
+                        phone,
+                        password,
+                        email});
+        }
+        
+        /// <remarks/>
+        public void UpdateClientAsync(int id, string name, string lastname, int cardnumber, int phone, string password, string email) {
+            this.UpdateClientAsync(id, name, lastname, cardnumber, phone, password, email, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateClientAsync(int id, string name, string lastname, int cardnumber, int phone, string password, string email, object userState) {
+            if ((this.UpdateClientOperationCompleted == null)) {
+                this.UpdateClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateClientOperationCompleted);
+            }
+            this.InvokeAsync("UpdateClient", new object[] {
+                        id,
+                        name,
+                        lastname,
+                        cardnumber,
+                        phone,
+                        password,
+                        email}, this.UpdateClientOperationCompleted, userState);
+        }
+        
+        private void OnUpdateClientOperationCompleted(object arg) {
+            if ((this.UpdateClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateReceptionist", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateReceptionist(int id, string name, string lastname, string password) {
+            this.Invoke("UpdateReceptionist", new object[] {
+                        id,
+                        name,
+                        lastname,
+                        password});
+        }
+        
+        /// <remarks/>
+        public void UpdateReceptionistAsync(int id, string name, string lastname, string password) {
+            this.UpdateReceptionistAsync(id, name, lastname, password, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateReceptionistAsync(int id, string name, string lastname, string password, object userState) {
+            if ((this.UpdateReceptionistOperationCompleted == null)) {
+                this.UpdateReceptionistOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateReceptionistOperationCompleted);
+            }
+            this.InvokeAsync("UpdateReceptionist", new object[] {
+                        id,
+                        name,
+                        lastname,
+                        password}, this.UpdateReceptionistOperationCompleted, userState);
+        }
+        
+        private void OnUpdateReceptionistOperationCompleted(object arg) {
+            if ((this.UpdateReceptionistCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateReceptionistCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void UpdateLogin(int id, string email, string password) {
+            this.Invoke("UpdateLogin", new object[] {
+                        id,
+                        email,
+                        password});
+        }
+        
+        /// <remarks/>
+        public void UpdateLoginAsync(int id, string email, string password) {
+            this.UpdateLoginAsync(id, email, password, null);
+        }
+        
+        /// <remarks/>
+        public void UpdateLoginAsync(int id, string email, string password, object userState) {
+            if ((this.UpdateLoginOperationCompleted == null)) {
+                this.UpdateLoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnUpdateLoginOperationCompleted);
+            }
+            this.InvokeAsync("UpdateLogin", new object[] {
+                        id,
+                        email,
+                        password}, this.UpdateLoginOperationCompleted, userState);
+        }
+        
+        private void OnUpdateLoginOperationCompleted(object arg) {
+            if ((this.UpdateLoginCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.UpdateLoginCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ChangePasswordLogin", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ChangePasswordLogin(int id, string password) {
+            this.Invoke("ChangePasswordLogin", new object[] {
+                        id,
+                        password});
+        }
+        
+        /// <remarks/>
+        public void ChangePasswordLoginAsync(int id, string password) {
+            this.ChangePasswordLoginAsync(id, password, null);
+        }
+        
+        /// <remarks/>
+        public void ChangePasswordLoginAsync(int id, string password, object userState) {
+            if ((this.ChangePasswordLoginOperationCompleted == null)) {
+                this.ChangePasswordLoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnChangePasswordLoginOperationCompleted);
+            }
+            this.InvokeAsync("ChangePasswordLogin", new object[] {
+                        id,
+                        password}, this.ChangePasswordLoginOperationCompleted, userState);
+        }
+        
+        private void OnChangePasswordLoginOperationCompleted(object arg) {
+            if ((this.ChangePasswordLoginCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ChangePasswordLoginCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ChangePasswordClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ChangePasswordClient(int id, string password) {
+            this.Invoke("ChangePasswordClient", new object[] {
+                        id,
+                        password});
+        }
+        
+        /// <remarks/>
+        public void ChangePasswordClientAsync(int id, string password) {
+            this.ChangePasswordClientAsync(id, password, null);
+        }
+        
+        /// <remarks/>
+        public void ChangePasswordClientAsync(int id, string password, object userState) {
+            if ((this.ChangePasswordClientOperationCompleted == null)) {
+                this.ChangePasswordClientOperationCompleted = new System.Threading.SendOrPostCallback(this.OnChangePasswordClientOperationCompleted);
+            }
+            this.InvokeAsync("ChangePasswordClient", new object[] {
+                        id,
+                        password}, this.ChangePasswordClientOperationCompleted, userState);
+        }
+        
+        private void OnChangePasswordClientOperationCompleted(object arg) {
+            if ((this.ChangePasswordClientCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ChangePasswordClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ChangePasswordReceptionist", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ChangePasswordReceptionist(int id, string password) {
+            this.Invoke("ChangePasswordReceptionist", new object[] {
+                        id,
+                        password});
+        }
+        
+        /// <remarks/>
+        public void ChangePasswordReceptionistAsync(int id, string password) {
+            this.ChangePasswordReceptionistAsync(id, password, null);
+        }
+        
+        /// <remarks/>
+        public void ChangePasswordReceptionistAsync(int id, string password, object userState) {
+            if ((this.ChangePasswordReceptionistOperationCompleted == null)) {
+                this.ChangePasswordReceptionistOperationCompleted = new System.Threading.SendOrPostCallback(this.OnChangePasswordReceptionistOperationCompleted);
+            }
+            this.InvokeAsync("ChangePasswordReceptionist", new object[] {
+                        id,
+                        password}, this.ChangePasswordReceptionistOperationCompleted, userState);
+        }
+        
+        private void OnChangePasswordReceptionistOperationCompleted(object arg) {
+            if ((this.ChangePasswordReceptionistCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ChangePasswordReceptionistCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -1285,6 +1511,30 @@ namespace WebLogic.localhost {
             }
         }
     }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void UpdateClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void UpdateReceptionistCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void UpdateLoginCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ChangePasswordLoginCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ChangePasswordClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ChangePasswordReceptionistCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591
