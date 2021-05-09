@@ -92,6 +92,21 @@ namespace English_exam
         }
 
         [WebMethod]
+        public void AddRoom(int number, string typeRoom, string Name, int spaces)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("INSERT INTO Room (Number, typeRoom, Name, Spaces) VALUES ( " + number + " , '" + typeRoom + "' , '" + Name + "' , " + spaces + "  )", conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
         public void RemoveClientbyId(int id)
         {
             string DBpath = Server.MapPath("database/marseloDatabase.db");
@@ -392,6 +407,41 @@ namespace English_exam
             return dt;
         }
 
+        [WebMethod]
+        public DataTable GetAllAvailableRoom()
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Room WHERE Available = 'YES'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
+
+        [WebMethod]
+        public DataTable GetAllNonAvailableRoom()
+        {
+
+            List<Client> listClients = new List<Client>();
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            DataTable dt = new DataTable();
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("SELECT * FROM Room WHERE Available = 'NO'", conn);
+                SQLiteDataReader reader = comm.ExecuteReader();
+                dt.Load(reader);
+                conn.Close();
+            }
+            return dt;
+        }
 
         [WebMethod]
         public void UpdateClient(int id, string name, string lastname, int cardnumber, int phone, string password, string email)
@@ -476,6 +526,21 @@ namespace English_exam
             {
                 conn.Open();
                 SQLiteCommand comm = new SQLiteCommand("UPDATE Receptionist SET password = '" + password + "' WHERE id = " + id, conn);
+                SQLiteDataAdapter da = new SQLiteDataAdapter();
+                da.InsertCommand = comm;
+                da.InsertCommand.ExecuteNonQuery();
+                conn.Close();
+            }
+        }
+
+        [WebMethod]
+        public void ChangeAvailableRoom(int id, string available)
+        {
+            string DBpath = Server.MapPath("database/marseloDatabase.db");
+            using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
+            {
+                conn.Open();
+                SQLiteCommand comm = new SQLiteCommand("UPDATE Room SET Available = '" + available + "' WHERE id = " + id, conn);
                 SQLiteDataAdapter da = new SQLiteDataAdapter();
                 da.InsertCommand = comm;
                 da.InsertCommand.ExecuteNonQuery();
