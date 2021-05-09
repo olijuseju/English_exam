@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using WebLogic.localhost;
 using System.Data;
 using System.Data.SQLite;
+using System.Text;
 
 namespace WebLogic
 {
@@ -26,6 +27,38 @@ namespace WebLogic
             {
                 ListOfReservations.Items.Add(drR[1].ToString());
             }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<table class=\"table table-striped\" id=\"TablaReservations\">");
+            sb.Append("<thead class=\"thead-dark\">");
+            sb.Append("<tr>");
+            sb.Append("<th scope=\"col\">ID RESERVATION</th>");
+            sb.Append("<th scope=\"col\">Client</th>");
+            sb.Append("<th scope=\"col\">Receptionist</th>");
+            sb.Append("<th scope=\"col\">Arrival date</th>");
+            sb.Append("<th scope=\"col\">Exit date</th>");
+            sb.Append("<th scope=\"col\">Room</th>");
+            sb.Append("</tr>");
+            sb.Append("</thead>");
+            sb.Append("<tbody id=\"reservationsData\">");
+            sb.Append("<tbody id=\"reservationsData\">");
+
+            foreach (DataRow dr in dR.Rows)
+            {
+                sb.Append("<tr>");
+                sb.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
+                sb.Append("<td>" + dr[1].ToString() + "</td>");
+                sb.Append("<td>" + dr[2].ToString() + "</td>");
+                sb.Append("<td>" + dr[3].ToString() + "</td>");
+                sb.Append("<td>" + dr[4].ToString() + "</td>");
+                sb.Append("<td>" + dr[5].ToString() + "</td>");
+                sb.Append("</tr>");
+
+            }
+
+            sb.Append("</tbody>");
+            sb.Append("</table>");
+            TablaReservations.Controls.Add(new Label { Text = sb.ToString() });
 
         }
 

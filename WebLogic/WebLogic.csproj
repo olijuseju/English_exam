@@ -73,16 +73,10 @@
     <Content Include="ClientsPage.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ReceptionistPage.aspx" />
-    <Content Include="Web References\localhost1\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <None Include="Web References\localhost1\WebService1.disco" />
     <Content Include="Web References\localhost\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
-    <None Include="Web References\localhost1\WebService1.wsdl" />
     <None Include="Web References\localhost\WebService1.disco" />
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm1.aspx" />
@@ -124,11 +118,6 @@
     </Compile>
     <Compile Include="Reservation.cs" />
     <Compile Include="Room.cs" />
-    <Compile Include="Web References\localhost1\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="Web References\localhost\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,19 +157,8 @@
   <ItemGroup>
     <WebReferenceUrl Include="https://localhost:44308/WebService1.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\localhost1\</RelPath>
-      <UpdateFromURL>https://localhost:44308/WebService1.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>WebLogic_localhost1_WebService1</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="https://localhost:44308/WebService1.asmx%3fop=ReservationExists">
-      <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\localhost\</RelPath>
-      <UpdateFromURL>https://localhost:44308/WebService1.asmx%3fop=ReservationExists</UpdateFromURL>
+      <UpdateFromURL>https://localhost:44308/WebService1.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
