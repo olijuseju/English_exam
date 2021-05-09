@@ -8,12 +8,14 @@ using WebLogic.localhost;
 using System.Data;
 using System.Data.SQLite;
 using System.Text;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace WebLogic
 {
     public partial class ReceptionistPage : System.Web.UI.Page
     {
-       
+        private int role;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["valor1"] != null)
@@ -45,7 +47,7 @@ namespace WebLogic
                     clientTable.Append("<td>" + dr[3].ToString() + "</td>");
                     clientTable.Append("<td>" + dr[4].ToString() + "</td>");
                     clientTable.Append("<td>" + dr[5].ToString() + "</td>");
-                    clientTable.Append("<td>" + "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
+                    clientTable.Append("<td>" + "<asp:LinkButton ID = 'Workarea' Text 'qlo' onclick = 'Workarea_Click' runat = 'server'></asp:LinkButton >" + "</td>");
                     clientTable.Append("</tr>");
 
                 }
@@ -81,7 +83,9 @@ namespace WebLogic
                     sb.Append("<td>" + dr[3].ToString() + "</td>");
                     sb.Append("<td>" + dr[4].ToString() + "</td>");
                     sb.Append("<td>" + dr[5].ToString() + "</td>");
-                    sb.Append("<td>"+ "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
+                    Button b1 = new Button();
+                    b1.Text = "button Label";
+                    b1.ID = "ButtonId";
                     sb.Append("</tr>");
 
                 }
@@ -89,6 +93,18 @@ namespace WebLogic
                 sb.Append("</tbody>");
                 sb.Append("</table>");
                 TablaReservations.Controls.Add(new Label { Text = sb.ToString() });
+
+                DataTable myUser = webService.GetRecepcionistById(Convert.ToInt32(Session["valor1"]));
+                foreach (DataRow dr in myUser.Rows)
+                {
+                    role = Convert.ToInt32(dr["role"]);
+                }
+
+                if (role == 1)
+                {
+                    Button5.Visible = true;
+                    Button6.Visible = true;
+                }
             }
             else
             {
@@ -100,27 +116,9 @@ namespace WebLogic
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            WebService1 webService = new WebService1();
-            if (NameClient.Text != "" && LastnameClient.Text != "" && CardNumberClient.Text != "" 
-                && PhoneClient.Text != "" && EmailClient.Text != "" && PasswordClient.Text != "")
+            if (role != 1)
             {
-                if(webService.ClientExists(NameClient.Text, LastnameClient.Text, 
-                    Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), 
-                    EmailClient.Text, PasswordClient.Text, Convert.ToInt32(Session["valor1"])).Equals(true))
-                {
-                    //dialog exite client
-                }
-                else
-                {
-                    webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text , Convert.ToInt32(Session["valor1"]), EmailClient.Text);
 
-                    int idClient = webService.GetIdClientExists(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text, Convert.ToInt32(Session["valor1"]));
-                    webService.AddLogin(EmailClient.Text, PasswordClient.Text, "client", idClient);
-                }
-            }
-            else
-            {
-                //dialog que esta vacio
             }
         }
 
@@ -149,6 +147,133 @@ namespace WebLogic
             {
                 //dialog que esta vacio
             }
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            if (role != 1)
+            {
+                List<Client> clients = new List<Client>();
+                List<LoginC> loginCs = new List<LoginC>();
+                WebService1 webService = new WebService1();
+                DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
+                foreach (DataRow dr in dt.Rows)
+                {
+                    clients.Add(new Client(Convert.ToInt32(dr["id"]), dr["name"].ToString(), dr["lastName"].ToString(), Convert.ToInt32(dr["cardNumber"]), Convert.ToInt32(dr["phone"]), dr["password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
+                    DataTable dtLogins = webService.GetLoginByClientId(Convert.ToInt32(dr["id"]));
+                    foreach(DataRow drLogin in dtLogins.Rows)
+                    {
+                        loginCs.Add(new LoginC(Convert.ToInt32(drLogin[0]), drLogin[1].ToString(), drLogin[2].ToString(), drLogin[3].ToString(), Convert.ToInt32(drLogin[4])));
+                    }
+                }
+                string JSONObject = JsonConvert.SerializeObject(clients);
+                string JSONObjectLogins = JsonConvert.SerializeObject(loginCs);
+
+                JSONObject += "\n" + JSONObjectLogins;
+                webService.ClearClientList();
+
+                TextBox1.Text = JSONObject;
+                System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataClients.txt"), JSONObject);
+            }
+            else
+            {
+                List<Client> clients = new List<Client>();
+                List<LoginC> loginCs = new List<LoginC>();
+                WebService1 webService = new WebService1();
+                DataTable dt = webService.GetAllClients();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    clients.Add(new Client(Convert.ToInt32(dr["id"]), dr["name"].ToString(), dr["lastName"].ToString(), Convert.ToInt32(dr["cardNumber"]), Convert.ToInt32(dr["phone"]), dr["password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
+                    DataTable dtLogins = webService.GetLoginByClientId(Convert.ToInt32(dr["id"]));
+                    foreach (DataRow drLogin in dtLogins.Rows)
+                    {
+                        loginCs.Add(new LoginC(Convert.ToInt32(drLogin[0]), drLogin[1].ToString(), drLogin[2].ToString(), drLogin[3].ToString(), Convert.ToInt32(drLogin[4])));
+                    }
+                }
+                string JSONObject = JsonConvert.SerializeObject(clients);
+                string JSONObjectLogins = JsonConvert.SerializeObject(loginCs);
+
+                JSONObject += "\n" + JSONObjectLogins;
+                webService.ClearClientList();
+
+                TextBox1.Text = JSONObject;
+                System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataClients.txt"), JSONObject);
+            }
+           
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            if (role != 1)
+            {
+                List<Reservation> reservations = new List<Reservation>();
+                WebService1 webService = new WebService1();
+                DataTable dt = webService.GetReservationByReceptionistId(Convert.ToInt32(Session["valor1"]));
+                foreach (DataRow dr in dt.Rows)
+                {
+                    reservations.Add(new Reservation(Convert.ToInt32(dr[0]), Convert.ToInt32(dr[1]), Convert.ToInt32(dr[2]), Convert.ToInt32(dr[3]), Convert.ToInt32(dr[4]), Convert.ToInt32(dr[5]), Convert.ToInt32(dr[6])));
+                }
+                string JSONObject = JsonConvert.SerializeObject(reservations);
+                webService.ClearClientList();
+
+                TextBox1.Text = JSONObject;
+                System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataReservations.txt"), JSONObject);
+            }
+            else
+            {
+                List<Reservation> reservations = new List<Reservation>();
+                WebService1 webService = new WebService1();
+                DataTable dt = webService.GetAllReservations();
+                foreach (DataRow dr in dt.Rows)
+                {
+                    reservations.Add(new Reservation(Convert.ToInt32(dr[0]), Convert.ToInt32(dr[1]), Convert.ToInt32(dr[2]), Convert.ToInt32(dr[3]), Convert.ToInt32(dr[4]), Convert.ToInt32(dr[5]), Convert.ToInt32(dr[6])));
+                }
+                string JSONObject = JsonConvert.SerializeObject(reservations);
+                webService.ClearClientList();
+
+                TextBox1.Text = JSONObject;
+                System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataReservations.txt"), JSONObject);
+            }
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            List<Recepcionist> recepcionists = new List<Recepcionist>();
+            List<LoginC> loginCs = new List<LoginC>();
+            WebService1 webService = new WebService1();
+            DataTable dt = webService.GetAllReceptionists();
+            foreach (DataRow dr in dt.Rows)
+            {
+                recepcionists.Add(new Recepcionist(Convert.ToInt32(dr[0]), dr[1].ToString(), dr[2].ToString(), dr[4].ToString(), Convert.ToInt32(dr[3])));
+                DataTable dtLogins = webService.GetLoginByReceptionistId(Convert.ToInt32(dr["id"]));
+                foreach (DataRow drLogin in dtLogins.Rows)
+                {
+                    loginCs.Add(new LoginC(Convert.ToInt32(drLogin[0]), drLogin[1].ToString(), drLogin[2].ToString(), drLogin[3].ToString(), Convert.ToInt32(drLogin[4])));
+                }
+            }
+            string JSONObject = JsonConvert.SerializeObject(recepcionists); 
+            string JSONObjectLogins = JsonConvert.SerializeObject(loginCs);
+
+            JSONObject += "\n" + JSONObjectLogins;
+            webService.ClearClientList();
+
+            TextBox1.Text = JSONObject;
+            System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataReceptionists.txt"), JSONObject);
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            List<Room> rooms = new List<Room>();
+            WebService1 webService = new WebService1();
+            DataTable dt = webService.GetAllRoom();
+            foreach (DataRow dr in dt.Rows)
+            {
+                rooms.Add(new Room(Convert.ToInt32(dr[0]), Convert.ToInt32(dr[0]), dr[2].ToString(), dr[3].ToString(), dr[4].ToString(), Convert.ToInt32(dr[5])));
+            }
+            string JSONObject = JsonConvert.SerializeObject(rooms);
+            webService.ClearClientList();
+            TextBox1.Text = JSONObject;
+            System.IO.File.WriteAllText(Server.MapPath("~/JsonData/jsondataRooms.txt"), JSONObject);
         }
     }
 }

@@ -1,0 +1,1 @@
+[{"id":1,"number":1,"typeRoom":"Normal","name":"Sexoooo","available":"YES","spaces":4},{"id":2,"number":2,"typeRoom":"Biblio","name":"Le COUSINS","available":"NO","spaces":12},{"id":3,"number":3,"typeRoom":"Normal","name":"erere","available":"YES","spaces":22},{"id":4,"number":4,"typeRoom":"rer","name":"Jose Julio Peñaranda Jara","available":"NO","spaces":44}]

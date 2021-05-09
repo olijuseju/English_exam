@@ -24,6 +24,8 @@
 
                 <asp:Panel ID="TablaClientOfReceptionist" runat="server"></asp:Panel>
                 
+                <asp:Button ID="Button3" runat="server" Text="Export Client" OnClick="Button3_Click" />
+                
             </div>
             <div class="col-12">
                 <asp:TextBox ID="CliendIdReservation" runat="server"></asp:TextBox>
@@ -35,7 +37,12 @@
 
                 
 
-                <asp:Panel ID="TablaReservations" runat="server"></asp:Panel>
+                <asp:Panel ID="TablaReservations" runat="server">
+                    <asp:TextBox ID="TextBox1" runat="server" Height="215px" Width="328px" TextMode="MultiLine"></asp:TextBox>
+                    <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="Export Reservation" />
+                    <asp:Button ID="Button5" runat="server" Text="Export Rooms" OnClick="Button5_Click" Visible="False" />
+                    <asp:Button ID="Button6" runat="server" Text="Export Receptionists" OnClick="Button6_Click" Visible="False" />
+                </asp:Panel>
             </div>
         </div>
         
