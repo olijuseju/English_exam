@@ -38,6 +38,8 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback AddClientOperationCompleted;
         
+        private System.Threading.SendOrPostCallback AddRoomOperationCompleted;
+        
         private System.Threading.SendOrPostCallback RemoveClientbyIdOperationCompleted;
         
         private System.Threading.SendOrPostCallback RemoveLoginbyIdOperationCompleted;
@@ -72,6 +74,10 @@ namespace WebLogic.localhost {
         
         private System.Threading.SendOrPostCallback GetAllRoomOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetAllAvailableRoomOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetAllNonAvailableRoomOperationCompleted;
+        
         private System.Threading.SendOrPostCallback UpdateClientOperationCompleted;
         
         private System.Threading.SendOrPostCallback UpdateReceptionistOperationCompleted;
@@ -83,6 +89,8 @@ namespace WebLogic.localhost {
         private System.Threading.SendOrPostCallback ChangePasswordClientOperationCompleted;
         
         private System.Threading.SendOrPostCallback ChangePasswordReceptionistOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ChangeAvailableRoomOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -133,6 +141,9 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         public event AddClientCompletedEventHandler AddClientCompleted;
+        
+        /// <remarks/>
+        public event AddRoomCompletedEventHandler AddRoomCompleted;
         
         /// <remarks/>
         public event RemoveClientbyIdCompletedEventHandler RemoveClientbyIdCompleted;
@@ -186,6 +197,12 @@ namespace WebLogic.localhost {
         public event GetAllRoomCompletedEventHandler GetAllRoomCompleted;
         
         /// <remarks/>
+        public event GetAllAvailableRoomCompletedEventHandler GetAllAvailableRoomCompleted;
+        
+        /// <remarks/>
+        public event GetAllNonAvailableRoomCompletedEventHandler GetAllNonAvailableRoomCompleted;
+        
+        /// <remarks/>
         public event UpdateClientCompletedEventHandler UpdateClientCompleted;
         
         /// <remarks/>
@@ -202,6 +219,9 @@ namespace WebLogic.localhost {
         
         /// <remarks/>
         public event ChangePasswordReceptionistCompletedEventHandler ChangePasswordReceptionistCompleted;
+        
+        /// <remarks/>
+        public event ChangeAvailableRoomCompletedEventHandler ChangeAvailableRoomCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/Login", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -351,6 +371,40 @@ namespace WebLogic.localhost {
             if ((this.AddClientCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.AddClientCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/AddRoom", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void AddRoom(int number, string typeRoom, string Name, int spaces) {
+            this.Invoke("AddRoom", new object[] {
+                        number,
+                        typeRoom,
+                        Name,
+                        spaces});
+        }
+        
+        /// <remarks/>
+        public void AddRoomAsync(int number, string typeRoom, string Name, int spaces) {
+            this.AddRoomAsync(number, typeRoom, Name, spaces, null);
+        }
+        
+        /// <remarks/>
+        public void AddRoomAsync(int number, string typeRoom, string Name, int spaces, object userState) {
+            if ((this.AddRoomOperationCompleted == null)) {
+                this.AddRoomOperationCompleted = new System.Threading.SendOrPostCallback(this.OnAddRoomOperationCompleted);
+            }
+            this.InvokeAsync("AddRoom", new object[] {
+                        number,
+                        typeRoom,
+                        Name,
+                        spaces}, this.AddRoomOperationCompleted, userState);
+        }
+        
+        private void OnAddRoomOperationCompleted(object arg) {
+            if ((this.AddRoomCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.AddRoomCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -862,6 +916,60 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllAvailableRoom", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllAvailableRoom() {
+            object[] results = this.Invoke("GetAllAvailableRoom", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllAvailableRoomAsync() {
+            this.GetAllAvailableRoomAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllAvailableRoomAsync(object userState) {
+            if ((this.GetAllAvailableRoomOperationCompleted == null)) {
+                this.GetAllAvailableRoomOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllAvailableRoomOperationCompleted);
+            }
+            this.InvokeAsync("GetAllAvailableRoom", new object[0], this.GetAllAvailableRoomOperationCompleted, userState);
+        }
+        
+        private void OnGetAllAvailableRoomOperationCompleted(object arg) {
+            if ((this.GetAllAvailableRoomCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllAvailableRoomCompleted(this, new GetAllAvailableRoomCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetAllNonAvailableRoom", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataTable GetAllNonAvailableRoom() {
+            object[] results = this.Invoke("GetAllNonAvailableRoom", new object[0]);
+            return ((System.Data.DataTable)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllNonAvailableRoomAsync() {
+            this.GetAllNonAvailableRoomAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllNonAvailableRoomAsync(object userState) {
+            if ((this.GetAllNonAvailableRoomOperationCompleted == null)) {
+                this.GetAllNonAvailableRoomOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllNonAvailableRoomOperationCompleted);
+            }
+            this.InvokeAsync("GetAllNonAvailableRoom", new object[0], this.GetAllNonAvailableRoomOperationCompleted, userState);
+        }
+        
+        private void OnGetAllNonAvailableRoomOperationCompleted(object arg) {
+            if ((this.GetAllNonAvailableRoomCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllNonAvailableRoomCompleted(this, new GetAllNonAvailableRoomCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/UpdateClient", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public void UpdateClient(int id, string name, string lastname, int cardnumber, int phone, string password, string email) {
             this.Invoke("UpdateClient", new object[] {
@@ -1058,6 +1166,36 @@ namespace WebLogic.localhost {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ChangeAvailableRoom", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void ChangeAvailableRoom(int id, string available) {
+            this.Invoke("ChangeAvailableRoom", new object[] {
+                        id,
+                        available});
+        }
+        
+        /// <remarks/>
+        public void ChangeAvailableRoomAsync(int id, string available) {
+            this.ChangeAvailableRoomAsync(id, available, null);
+        }
+        
+        /// <remarks/>
+        public void ChangeAvailableRoomAsync(int id, string available, object userState) {
+            if ((this.ChangeAvailableRoomOperationCompleted == null)) {
+                this.ChangeAvailableRoomOperationCompleted = new System.Threading.SendOrPostCallback(this.OnChangeAvailableRoomOperationCompleted);
+            }
+            this.InvokeAsync("ChangeAvailableRoom", new object[] {
+                        id,
+                        available}, this.ChangeAvailableRoomOperationCompleted, userState);
+        }
+        
+        private void OnChangeAvailableRoomOperationCompleted(object arg) {
+            if ((this.ChangeAvailableRoomCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ChangeAvailableRoomCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -1157,6 +1295,10 @@ namespace WebLogic.localhost {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void AddClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void AddRoomCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
@@ -1514,6 +1656,58 @@ namespace WebLogic.localhost {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAllAvailableRoomCompletedEventHandler(object sender, GetAllAvailableRoomCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllAvailableRoomCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllAvailableRoomCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void GetAllNonAvailableRoomCompletedEventHandler(object sender, GetAllNonAvailableRoomCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllNonAvailableRoomCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllNonAvailableRoomCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataTable Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataTable)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void UpdateClientCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
     
     /// <remarks/>
@@ -1535,6 +1729,10 @@ namespace WebLogic.localhost {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void ChangePasswordReceptionistCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ChangeAvailableRoomCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

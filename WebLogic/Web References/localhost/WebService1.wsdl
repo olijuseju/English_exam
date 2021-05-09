@@ -79,6 +79,19 @@
       <s:element name="AddClientResponse">
         <s:complexType />
       </s:element>
+      <s:element name="AddRoom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="number" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="typeRoom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="spaces" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddRoomResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="RemoveClientbyId">
         <s:complexType>
           <s:sequence>
@@ -382,6 +395,40 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetAllAvailableRoom">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllAvailableRoomResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllAvailableRoomResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllNonAvailableRoom">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllNonAvailableRoomResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllNonAvailableRoomResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="UpdateClient">
         <s:complexType>
           <s:sequence>
@@ -456,6 +503,17 @@
       <s:element name="ChangePasswordReceptionistResponse">
         <s:complexType />
       </s:element>
+      <s:element name="ChangeAvailableRoom">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="available" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangeAvailableRoomResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="LoginSoapIn">
@@ -481,6 +539,12 @@
   </wsdl:message>
   <wsdl:message name="AddClientSoapOut">
     <wsdl:part name="parameters" element="tns:AddClientResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:AddRoom" />
+  </wsdl:message>
+  <wsdl:message name="AddRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:AddRoomResponse" />
   </wsdl:message>
   <wsdl:message name="RemoveClientbyIdSoapIn">
     <wsdl:part name="parameters" element="tns:RemoveClientbyId" />
@@ -584,6 +648,18 @@
   <wsdl:message name="GetAllRoomSoapOut">
     <wsdl:part name="parameters" element="tns:GetAllRoomResponse" />
   </wsdl:message>
+  <wsdl:message name="GetAllAvailableRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllAvailableRoom" />
+  </wsdl:message>
+  <wsdl:message name="GetAllAvailableRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllAvailableRoomResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNonAvailableRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllNonAvailableRoom" />
+  </wsdl:message>
+  <wsdl:message name="GetAllNonAvailableRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllNonAvailableRoomResponse" />
+  </wsdl:message>
   <wsdl:message name="UpdateClientSoapIn">
     <wsdl:part name="parameters" element="tns:UpdateClient" />
   </wsdl:message>
@@ -620,6 +696,12 @@
   <wsdl:message name="ChangePasswordReceptionistSoapOut">
     <wsdl:part name="parameters" element="tns:ChangePasswordReceptionistResponse" />
   </wsdl:message>
+  <wsdl:message name="ChangeAvailableRoomSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangeAvailableRoom" />
+  </wsdl:message>
+  <wsdl:message name="ChangeAvailableRoomSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangeAvailableRoomResponse" />
+  </wsdl:message>
   <wsdl:portType name="WebService1Soap">
     <wsdl:operation name="Login">
       <wsdl:input message="tns:LoginSoapIn" />
@@ -636,6 +718,10 @@
     <wsdl:operation name="AddClient">
       <wsdl:input message="tns:AddClientSoapIn" />
       <wsdl:output message="tns:AddClientSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRoom">
+      <wsdl:input message="tns:AddRoomSoapIn" />
+      <wsdl:output message="tns:AddRoomSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="RemoveClientbyId">
       <wsdl:input message="tns:RemoveClientbyIdSoapIn" />
@@ -705,6 +791,14 @@
       <wsdl:input message="tns:GetAllRoomSoapIn" />
       <wsdl:output message="tns:GetAllRoomSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllAvailableRoom">
+      <wsdl:input message="tns:GetAllAvailableRoomSoapIn" />
+      <wsdl:output message="tns:GetAllAvailableRoomSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNonAvailableRoom">
+      <wsdl:input message="tns:GetAllNonAvailableRoomSoapIn" />
+      <wsdl:output message="tns:GetAllNonAvailableRoomSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="UpdateClient">
       <wsdl:input message="tns:UpdateClientSoapIn" />
       <wsdl:output message="tns:UpdateClientSoapOut" />
@@ -728,6 +822,10 @@
     <wsdl:operation name="ChangePasswordReceptionist">
       <wsdl:input message="tns:ChangePasswordReceptionistSoapIn" />
       <wsdl:output message="tns:ChangePasswordReceptionistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAvailableRoom">
+      <wsdl:input message="tns:ChangeAvailableRoomSoapIn" />
+      <wsdl:output message="tns:ChangeAvailableRoomSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WebService1Soap" type="tns:WebService1Soap">
@@ -761,6 +859,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddClient">
       <soap:operation soapAction="http://tempuri.org/AddClient" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoom">
+      <soap:operation soapAction="http://tempuri.org/AddRoom" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -921,6 +1028,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllAvailableRoom">
+      <soap:operation soapAction="http://tempuri.org/GetAllAvailableRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNonAvailableRoom">
+      <soap:operation soapAction="http://tempuri.org/GetAllNonAvailableRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UpdateClient">
       <soap:operation soapAction="http://tempuri.org/UpdateClient" style="document" />
       <wsdl:input>
@@ -975,6 +1100,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ChangeAvailableRoom">
+      <soap:operation soapAction="http://tempuri.org/ChangeAvailableRoom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="WebService1Soap12" type="tns:WebService1Soap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1007,6 +1141,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddClient">
       <soap12:operation soapAction="http://tempuri.org/AddClient" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRoom">
+      <soap12:operation soapAction="http://tempuri.org/AddRoom" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1167,6 +1310,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetAllAvailableRoom">
+      <soap12:operation soapAction="http://tempuri.org/GetAllAvailableRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllNonAvailableRoom">
+      <soap12:operation soapAction="http://tempuri.org/GetAllNonAvailableRoom" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="UpdateClient">
       <soap12:operation soapAction="http://tempuri.org/UpdateClient" style="document" />
       <wsdl:input>
@@ -1214,6 +1375,15 @@
     </wsdl:operation>
     <wsdl:operation name="ChangePasswordReceptionist">
       <soap12:operation soapAction="http://tempuri.org/ChangePasswordReceptionist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAvailableRoom">
+      <soap12:operation soapAction="http://tempuri.org/ChangeAvailableRoom" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
