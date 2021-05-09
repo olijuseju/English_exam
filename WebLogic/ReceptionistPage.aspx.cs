@@ -50,6 +50,9 @@ namespace WebLogic
                 else
                 {
                     webService.AddClient(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text , Convert.ToInt32(Session["valor1"]), EmailClient.Text);
+
+                    int idClient = webService.GetIdClientExists(NameClient.Text, LastnameClient.Text, Convert.ToInt32(CardNumberClient.Text), Convert.ToInt32(PhoneClient.Text), PasswordClient.Text, Convert.ToInt32(Session["valor1"]));
+                    webService.AddLogin(EmailClient.Text, PasswordClient.Text, "client", idClient);
                 }
             }
             else
