@@ -73,18 +73,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Home.aspx" />
-    <Content Include="LoginPage.aspx" />
-    <Content Include="user\UserClientPage.aspx" />
+    <Content Include="user\ClientsPage.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Receptionist\ReceptionistPage.aspx" />
+    <Content Include="user\Web.config" />
+    <Content Include="Receptionist\Web.config" />
     <Content Include="Web References\localhost\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
-    <Content Include="user\Web.config" />
-    <Content Include="Receptionist\Web.config" />
-    <Content Include="Masterpage.Master" />
     <None Include="Web References\localhost\WebService1.disco" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="WebForm1.aspx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,33 +93,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Home.aspx.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="user\ClientsPage.aspx.cs">
+      <DependentUpon>ClientsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Home.aspx.designer.cs">
-      <DependentUpon>Home.aspx</DependentUpon>
+    <Compile Include="user\ClientsPage.aspx.designer.cs">
+      <DependentUpon>ClientsPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="LoginPage.aspx.cs">
-      <DependentUpon>LoginPage.aspx</DependentUpon>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LoginPage.aspx.designer.cs">
-      <DependentUpon>LoginPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Masterpage.Master.cs">
-      <DependentUpon>Masterpage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Masterpage.Master.designer.cs">
-      <DependentUpon>Masterpage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="user\UserClientPage.aspx.cs">
-      <DependentUpon>UserClientPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="user\UserClientPage.aspx.designer.cs">
-      <DependentUpon>UserClientPage.aspx</DependentUpon>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +129,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -160,7 +160,6 @@
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <WebReferenceUrl Include="https://localhost:44308/WebService1.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
