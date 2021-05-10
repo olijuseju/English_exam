@@ -73,13 +73,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientsPage.aspx" />
+    <Content Include="user\ClientsPage.aspx" />
     <Content Include="Login.aspx" />
-    <Content Include="ReceptionistPage.aspx" />
+    <Content Include="Receptionist\ReceptionistPage.aspx" />
     <Content Include="Web References\localhost\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
+    <Content Include="user\Web.config" />
+    <Content Include="Receptionist\Web.config" />
     <None Include="Web References\localhost\WebService1.disco" />
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm1.aspx" />
@@ -90,12 +92,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="ClientsPage.aspx.cs">
+    <Compile Include="Class1.cs" />
+    <Compile Include="user\ClientsPage.aspx.cs">
       <DependentUpon>ClientsPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClientsPage.aspx.designer.cs">
+    <Compile Include="user\ClientsPage.aspx.designer.cs">
       <DependentUpon>ClientsPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
@@ -113,11 +115,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Recepcionist.cs" />
-    <Compile Include="ReceptionistPage.aspx.cs">
+    <Compile Include="Receptionist\ReceptionistPage.aspx.cs">
       <DependentUpon>ReceptionistPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ReceptionistPage.aspx.designer.cs">
+    <Compile Include="Receptionist\ReceptionistPage.aspx.designer.cs">
       <DependentUpon>ReceptionistPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reservation.cs" />
@@ -158,6 +160,7 @@
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WebReferenceUrl Include="https://localhost:44308/WebService1.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
