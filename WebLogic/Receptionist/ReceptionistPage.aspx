@@ -108,11 +108,7 @@
                             </div>
                         </div>
                         <div class="row">
-                             <div class="mb-3 col">
-                                    <asp:label  CssClass="form-label" runat="server" Text="Email"></asp:label>
-                                    <asp:TextBox ID="EmailClientUpdate"  CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>
-                             </div>
-                            
+                             
                              <div class="mb-3 col">
                                     <asp:label  CssClass="form-label" runat="server" Text="Password"></asp:label>
                                     <asp:TextBox ID="PasswordClientUpdate"  CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>

@@ -17,7 +17,6 @@ namespace WebLogic
     {
         private int role;
         private List<Client> listOfClients = new List<Client>();
-        
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -35,7 +34,7 @@ namespace WebLogic
             }
             else
             {
-                Response.Redirect("../Login.aspx");
+                Response.Redirect("Login.aspx");
             }
 
 
@@ -46,16 +45,10 @@ namespace WebLogic
             listOfClients.Clear();
             WebService1 webService = new WebService1();
             DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
-            DataTable dtLogin;
+            //DataTable dtLogin= webService.getLo
             foreach (DataRow dr in dt.Rows)
             {
-                dtLogin = webService.GetLoginByClientId(Convert.ToInt32(dr["Id"]));
-                foreach (DataRow drEmail in dtLogin.Rows)
-                {
-                    listOfClients.Add(new Client(Convert.ToInt32(dr["Id"]), dr["Name"].ToString(), dr["Lastname"].ToString(),
-                        (int)Convert.ToInt64(dr["CardNumber"]), (int)Convert.ToInt64(dr["Phone"]),
-                        dr["Password"].ToString(), Convert.ToInt32(dr["RecepcionistId"]), drEmail["email"].ToString() ));
-                } 
+                listOfClients.Add(new Client(Convert.ToInt32(dr["Id"]), dr["Name"].ToString(), dr["Lastname"].ToString(), (int)Convert.ToInt64(dr["CardNumber"]), (int)Convert.ToInt64(dr["Phone"]), dr["Password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
             }
         }
 
@@ -82,7 +75,7 @@ namespace WebLogic
 
             foreach (Client client in listOfClients)
             {
-                ListsOfClientOfRecepcionist.Items.Add("Name: "+client.name + " LastName: " + client.lastName + " CardNumber: " + client.cardNumer.ToString() + " Phone: " + client.phone.ToString() + " Password: " + client.password + " ID Recepcionist: " + client.RecpcionistId.ToString() + " Email: " + client.email);
+                ListsOfClientOfRecepcionist.Items.Add("Name: "+client.name + " LastName: " + client.lastName + " CardNumber: " + client.cardNumer.ToString() + " Phone: " + client.phone.ToString() + " Password: " + client.password + " ID Recepcionist: " + client.RecpcionistId.ToString());
 
             }
         }
@@ -321,7 +314,7 @@ namespace WebLogic
             LastnameClientUpdate.Enabled = true;
             CardNumberClientUpdate.Enabled = true;
             PhoneClientUpdate.Enabled = true;
-            EmailClientUpdate.Enabled = true;
+            
             PasswordClientUpdate.Enabled = true;
             btnUpdateClient.Enabled = true;
             
@@ -329,13 +322,11 @@ namespace WebLogic
             pos = ListsOfClientOfRecepcionist.SelectedIndex;
 
             Client updateClient= listOfClients[pos];
-
             NameClientUpdate.Text = updateClient.name;
             LastnameClientUpdate.Text = updateClient.lastName;
             CardNumberClientUpdate.Text = updateClient.cardNumer.ToString();
             PhoneClientUpdate.Text = updateClient.phone.ToString();
             PasswordClientUpdate.Text = updateClient.password;
-            EmailClientUpdate.Text = updateClient.email;
             
 
         }
@@ -355,8 +346,6 @@ namespace WebLogic
             PhoneClientUpdate.Text = "";
             PasswordClientUpdate.Enabled = false;
             PasswordClientUpdate.Text = "";
-            EmailClientUpdate.Enabled = false;
-            EmailClientUpdate.Text = "";
             btnUpdateClient.Enabled = false;
 
         }
@@ -365,18 +354,10 @@ namespace WebLogic
         {
             if(NameClientUpdate.Text != "" && LastnameClientUpdate.Text != "" && CardNumberClientUpdate.Text != "" 
                 && PhoneClientUpdate.Text != ""
-                && PasswordClientUpdate.Text != "" && EmailClientUpdate.Text != "")
+                && PasswordClientUpdate.Text != "")
             {
-                int pos = 0;
-                pos = ListsOfClientOfRecepcionist.SelectedIndex;
-
-                Client updateClient = listOfClients[pos];
-
                 WebService1 webService = new WebService1();
-                webService.UpdateClient(updateClient.id, NameClientUpdate.Text , LastnameClientUpdate.Text, (int)Convert.ToInt64(CardNumberClientUpdate.Text)  , (int)Convert.ToInt64(PhoneClientUpdate.Text) , PasswordClientUpdate.Text);
-                webService.UpdateLogin(updateClient.id, EmailClientUpdate.Text, PasswordClientUpdate.Text);
-                setListOfClients();
-                ListBoxClients();
+                //webService.UpdateClient(NameClient.Text , LastnameClientUpdate.Text, CardNumberClientUpdate.Text , PasswordClientUpdate.Text);
             }
             else
             {
