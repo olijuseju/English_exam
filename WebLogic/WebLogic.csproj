@@ -76,12 +76,12 @@
     <Content Include="user\ClientsPage.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Receptionist\ReceptionistPage.aspx" />
+    <Content Include="user\Web.config" />
+    <Content Include="Receptionist\Web.config" />
     <Content Include="Web References\localhost\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
-    <Content Include="user\Web.config" />
-    <Content Include="Receptionist\Web.config" />
     <None Include="Web References\localhost\WebService1.disco" />
     <Content Include="WebForm2.aspx" />
     <Content Include="WebForm1.aspx" />
@@ -160,7 +160,6 @@
   <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <WebReferenceUrl Include="https://localhost:44308/WebService1.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
