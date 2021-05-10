@@ -45,6 +45,7 @@ namespace WebLogic
             listOfClients.Clear();
             WebService1 webService = new WebService1();
             DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
+            //DataTable dtLogin= webService.getLo
             foreach (DataRow dr in dt.Rows)
             {
                 listOfClients.Add(new Client(Convert.ToInt32(dr["Id"]), dr["Name"].ToString(), dr["Lastname"].ToString(), (int)Convert.ToInt64(dr["CardNumber"]), (int)Convert.ToInt64(dr["Phone"]), dr["Password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
@@ -356,7 +357,7 @@ namespace WebLogic
                 && PasswordClientUpdate.Text != "")
             {
                 WebService1 webService = new WebService1();
-                //webService.UpdateClient();
+                //webService.UpdateClient(NameClient.Text , LastnameClientUpdate.Text, CardNumberClientUpdate.Text , PasswordClientUpdate.Text);
             }
             else
             {
