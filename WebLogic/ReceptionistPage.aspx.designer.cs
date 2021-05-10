@@ -33,15 +33,6 @@ namespace WebLogic
         protected global::System.Web.UI.WebControls.Panel TablaClientOfReceptionist;
 
         /// <summary>
-        /// Control Button3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
-
-        /// <summary>
         /// Control CliendIdReservation.
         /// </summary>
         /// <remarks>
@@ -141,6 +132,15 @@ namespace WebLogic
         protected global::System.Web.UI.WebControls.Button Button6;
 
         /// <summary>
+        /// Control Button3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button3;
+
+        /// <summary>
         /// Control RemoveClientButton.
         /// </summary>
         /// <remarks>
@@ -220,5 +220,68 @@ namespace WebLogic
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button7;
+
+        /// <summary>
+        /// Control NameClientUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NameClientUpdate;
+
+        /// <summary>
+        /// Control LastnameClientUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox LastnameClientUpdate;
+
+        /// <summary>
+        /// Control CardNumberClientUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CardNumberClientUpdate;
+
+        /// <summary>
+        /// Control PhoneClientUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PhoneClientUpdate;
+
+        /// <summary>
+        /// Control EmailClientUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox EmailClientUpdate;
+
+        /// <summary>
+        /// Control PasswordClientUpdate.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PasswordClientUpdate;
+
+        /// <summary>
+        /// Control btnUpdateClient.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateClient;
     }
 }

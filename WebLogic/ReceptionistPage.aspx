@@ -15,7 +15,7 @@
         <div class="container">
             <div>
                 <asp:Panel ID="TablaClientOfReceptionist" runat="server"></asp:Panel>
-                <asp:Button ID="Button3" runat="server" Text="Export Client" OnClick="Button3_Click" />
+                
             </div>
             <div class="col-12">
                 <asp:TextBox ID="CliendIdReservation" runat="server"></asp:TextBox>
@@ -35,45 +35,96 @@
                     <asp:Button ID="Button6" runat="server" Text="Export Receptionists" OnClick="Button6_Click" Visible="False" />
             </div>
             <div class="row   mt-5  ">
-                <div class="col mt-4  d-flex  flex-column">
-                    <asp:Button ID="RemoveClientButton" CssClass="btn btn-danger  btn-lg mb-2 " runat="server" Text="Select a client of the list to remove"  Enabled="False" OnClick="RemoveClientButton_Click" />
+                <div class="col-12 mt-4  d-flex  flex-column">
+                    <div class=" d-flex justify-content-between">
+                        <asp:Button ID="Button3" runat="server" CssClass="btn btn-outline-dark btn-lg mb-2" Text="Export Client" OnClick="Button3_Click" />
+                        <asp:Button ID="RemoveClientButton" CssClass="btn btn-danger  btn-lg mb-2" runat="server" Text="Select a client of the list to remove"  Enabled="False" OnClick="RemoveClientButton_Click" />
+                    </div>
                     <asp:ListBox ID="ListsOfClientOfRecepcionist" CssClass="  h-100 " runat="server" AutoPostBack="True" OnSelectedIndexChanged="ListsOfClientOfRecepcionist_SelectedIndexChanged"></asp:ListBox>
                 </div>
-                 <div class="col  mt-4  d-flex  flex-column">
+                 <div class="col-12  mt-4  ">
                      <div class="row">
-                         <div class="mb-3 col">
-                            <asp:label  CssClass="form-label" runat="server" Text="Name"></asp:label>
-                            <asp:TextBox ID="NameClient" type="text" CssClass="form-control"  runat="server"></asp:TextBox>
+                         <div class="col-6 d-flex  flex-column">
+                             <h3 class="text-center">Create Client</h3>
+                         <div class="row">
+                             <div class="mb-3 col">
+                                <asp:label  CssClass="form-label" runat="server" Text="Name"></asp:label>
+                                <asp:TextBox ID="NameClient" type="text" CssClass="form-control"  runat="server"></asp:TextBox>
                         
-                         </div>
-                            <div class="mb-3 col">
-                                <asp:label  CssClass="form-label" runat="server" Text="Lastname"></asp:label>
-                                <asp:TextBox ID="LastnameClient" type="text" CssClass="form-control"  runat="server"></asp:TextBox>
+                             </div>
+                                <div class="mb-3 col">
+                                    <asp:label  CssClass="form-label" runat="server" Text="Lastname"></asp:label>
+                                    <asp:TextBox ID="LastnameClient" type="text" CssClass="form-control"  runat="server"></asp:TextBox>
+                            </div>
                         </div>
-                    </div>
-                     <div class="row">
-                         <div class="mb-3 col">
-                            <asp:label  CssClass="form-label" runat="server" Text="CardName"></asp:label>
-                            <asp:TextBox ID="CardNumberClient" type="text" CssClass="form-control" TextMode="Number"  runat="server"></asp:TextBox>
+                        <div class="row">
+                             <div class="mb-3 col">
+                                <asp:label  CssClass="form-label" runat="server" Text="CardName"></asp:label>
+                                <asp:TextBox ID="CardNumberClient" type="text" CssClass="form-control" TextMode="Number"  runat="server"></asp:TextBox>
                         
-                         </div>
-                         <div class="mb-3 col">
-                                <asp:label  CssClass="form-label" runat="server" Text="Phone"></asp:label>
-                                <asp:TextBox ID="PhoneClient" type="text" CssClass="form-control" TextMode="Phone"  runat="server"></asp:TextBox>
+                             </div>
+                             <div class="mb-3 col">
+                                    <asp:label  CssClass="form-label" runat="server" Text="Phone"></asp:label>
+                                    <asp:TextBox ID="PhoneClient" type="text" CssClass="form-control" TextMode="Phone"  runat="server"></asp:TextBox>
+                            </div>
                         </div>
-                    </div>
-                     <div class="row">
-                         <div class="mb-3 col">
-                            <asp:label  CssClass="form-label" runat="server" Text="Email"></asp:label>
-                            <asp:TextBox ID="EmailClient" type="text" CssClass="form-control" TextMode="Email"  runat="server"></asp:TextBox>
+                        <div class="row">
+                             <div class="mb-3 col">
+                                <asp:label  CssClass="form-label" runat="server" Text="Email"></asp:label>
+                                <asp:TextBox ID="EmailClient" type="text" CssClass="form-control" TextMode="Email"  runat="server"></asp:TextBox>
                         
+                             </div>
+                             <div class="mb-3 col">
+                                    <asp:label  CssClass="form-label" runat="server" Text="Password"></asp:label>
+                                    <asp:TextBox ID="PasswordClient" TextMode="Password" CssClass="form-control"  runat="server"></asp:TextBox>
+                             </div>
+                          </div>
+                             <div class="d-flex justify-content-end">
+                                <asp:Button ID="Button7"  CssClass="btn btn-primary btn-lg " runat="server" Text="Create client" OnClick="Button1_Click" />
+                             </div>
+                     </div>
+                     <div class="col-6">
+                         <div class="row">
+                             <h3 class="text-center">Update Client</h3>
+                             <div class="mb-3 col">
+                                <asp:label  CssClass="form-label" runat="server" Text="Name"></asp:label>
+                                <asp:TextBox ID="NameClientUpdate" type="text" CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>
+                        
+                             </div>
+                                <div class="mb-3 col">
+                                    <asp:label  CssClass="form-label" runat="server" Text="Lastname"></asp:label>
+                                    <asp:TextBox ID="LastnameClientUpdate" type="text" CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="mb-3 col">
+                                <asp:label  CssClass="form-label" runat="server" Text="CardName"></asp:label>
+                                <asp:TextBox ID="CardNumberClientUpdate" type="text" CssClass="form-control" TextMode="Number"  runat="server" Enabled="False"></asp:TextBox>
+                        
+                             </div>
+                             <div class="mb-3 col">
+                                    <asp:label  CssClass="form-label" runat="server" Text="Phone"></asp:label>
+                                    <asp:TextBox ID="PhoneClientUpdate" type="text" CssClass="form-control" TextMode="Phone"  runat="server" Enabled="False"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="mb-3 col">
+                                <asp:label  CssClass="form-label" runat="server" Text="Email"></asp:label>
+                                <asp:TextBox ID="EmailClientUpdate" type="text" CssClass="form-control" TextMode="Email"  runat="server" Enabled="False"></asp:TextBox>
+                        
+                             </div>
+                             <div class="mb-3 col">
+                                    <asp:label  CssClass="form-label" runat="server" Text="Password"></asp:label>
+                                    <asp:TextBox ID="PasswordClientUpdate" TextMode="Password" CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>
+                             </div>
+                          </div>
+                         <div class="d-flex justify-content-end">
+                            <asp:Button ID="btnUpdateClient"  CssClass="btn btn-primary btn-lg " runat="server" Text="Update Client" OnClick="Button1_Click" Enabled="False"/>
                          </div>
-                         <div class="mb-3 col">
-                                <asp:label  CssClass="form-label" runat="server" Text="Password"></asp:label>
-                                <asp:TextBox ID="PasswordClient" TextMode="Password" CssClass="form-control"  runat="server"></asp:TextBox>
-                         </div>
-                      </div>
-                      <asp:Button ID="Button7"  CssClass="btn btn-primary btn-lg " runat="server" Text="Create client" OnClick="Button1_Click" />
+                        </div>
+                     </div>
+                     
+                     
                 </div>
             </div>
         </div>

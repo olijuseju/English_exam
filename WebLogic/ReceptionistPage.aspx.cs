@@ -86,7 +86,7 @@ namespace WebLogic
                 clientTable.Append("<td>" + "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
                 clientTable.Append("</tr>");
 
-                ListsOfClientOfRecepcionist.Items.Add(dr[1].ToString() + " " + dr[2].ToString());
+                ListsOfClientOfRecepcionist.Items.Add("Name: "+dr[1].ToString() + " LastName: " + dr[2].ToString() + " CardNumber: " + dr[3].ToString() + " Phone: " + dr[4].ToString() + " Email: " + dr[5].ToString() + " Password: " + dr[6].ToString());
 
             }
 
@@ -325,6 +325,13 @@ namespace WebLogic
         {
             RemoveClientButton.Text = "Remove";
             RemoveClientButton.Enabled = true;
+            NameClientUpdate.Enabled = true;
+            LastnameClientUpdate.Enabled = true;
+            CardNumberClientUpdate.Enabled = true;
+            PhoneClientUpdate.Enabled = true;
+            EmailClientUpdate.Enabled = true;
+            PasswordClientUpdate.Enabled = true;
+            btnUpdateClient.Enabled = true;
 
         }
 
@@ -333,6 +340,14 @@ namespace WebLogic
             ListsOfClientOfRecepcionist.ClearSelection();
             RemoveClientButton.Enabled = false;
             RemoveClientButton.Text = "Select a client of the list to remove";
+            NameClientUpdate.Enabled = false;
+            LastnameClientUpdate.Enabled = false;
+            CardNumberClientUpdate.Enabled = false;
+            PhoneClientUpdate.Enabled = false;
+            EmailClientUpdate.Enabled = false;
+            PasswordClientUpdate.Enabled = false;
+            btnUpdateClient.Enabled = false;
+
         }
     }
 }
