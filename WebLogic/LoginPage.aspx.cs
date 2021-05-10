@@ -10,11 +10,11 @@ using System.Web.UI.WebControls;
 using WebLogic.localhost;
 using System.Web.Security;
 
-
 namespace WebLogic
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class LoginPage : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["valor1"] = null;
@@ -38,13 +38,13 @@ namespace WebLogic
                 if (dr["type"].ToString().Equals("client"))
                 {
                     DataTable dtClient = ws.GetClientById(Convert.ToInt32(dr["idUser"]));
-                    foreach(DataRow drClient in dtClient.Rows)
+                    foreach (DataRow drClient in dtClient.Rows)
                     {
-                        int valor =Convert.ToInt32(drClient["id"]);
+                        int valor = Convert.ToInt32(drClient["id"]);
 
                         Session["valor1"] = valor;
                         FormsAuthentication.SetAuthCookie("user", true);
-                        Response.Redirect("user/ClientsPage.aspx");
+                        Response.Redirect("user/UserClientPage.aspx");
                     }
                 }
                 else

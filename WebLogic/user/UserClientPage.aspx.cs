@@ -9,7 +9,7 @@ using System.Data;
 
 namespace WebLogic
 {
-    public partial class ClientsPage : System.Web.UI.Page
+    public partial class UserClientPage : System.Web.UI.Page
     {
         public WebService1 webService = new WebService1();
 
@@ -18,14 +18,15 @@ namespace WebLogic
         {
             if (Session["valor1"] != null)
             {
-                
+
                 DataTable dt = webService.GetClientById(Convert.ToInt32(Session["valor1"]));
-                foreach(DataRow dr in dt.Rows){
+                foreach (DataRow dr in dt.Rows)
+                {
                     Label1.Text = "Bienvenido, señor/a " + dr[1].ToString() + " " + dr[2].ToString();
 
                 }
 
-                DataTable ReservationsTable= webService.GetReservationByClientId(Convert.ToInt32(Session["valor1"]));
+                DataTable ReservationsTable = webService.GetReservationByClientId(Convert.ToInt32(Session["valor1"]));
                 foreach (DataRow ReservationsTableRow in ReservationsTable.Rows)
                 {
                     ListBox1.Items.Add("Arrival Date: " + ReservationsTableRow["arrivalDate"]);
