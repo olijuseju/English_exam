@@ -45,10 +45,13 @@ namespace WebLogic
             listOfClients.Clear();
             WebService1 webService = new WebService1();
             DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
-            //DataTable dtLogin= webService.getLo
+            DataTable dtLogin;
             foreach (DataRow dr in dt.Rows)
             {
-                listOfClients.Add(new Client(Convert.ToInt32(dr["Id"]), dr["Name"].ToString(), dr["Lastname"].ToString(), (int)Convert.ToInt64(dr["CardNumber"]), (int)Convert.ToInt64(dr["Phone"]), dr["Password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
+                dtLogin = webService.GetLoginByClientId(Convert.ToInt32(dr["Id"]));
+                listOfClients.Add(new Client(Convert.ToInt32(dr["Id"]), dr["Name"].ToString(), dr["Lastname"].ToString(),
+                    (int)Convert.ToInt64(dr["CardNumber"]), (int)Convert.ToInt64(dr["Phone"]), 
+                    dr["Password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
             }
         }
 
