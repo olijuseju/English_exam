@@ -108,18 +108,14 @@
                             </div>
                         </div>
                         <div class="row">
-                             <div class="mb-3 col">
-                                <asp:label  CssClass="form-label" runat="server" Text="Email"></asp:label>
-                                <asp:TextBox ID="EmailClientUpdate" type="text" CssClass="form-control" TextMode="Email"  runat="server" Enabled="False"></asp:TextBox>
-                        
-                             </div>
+                             
                              <div class="mb-3 col">
                                     <asp:label  CssClass="form-label" runat="server" Text="Password"></asp:label>
-                                    <asp:TextBox ID="PasswordClientUpdate" TextMode="Password" CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>
+                                    <asp:TextBox ID="PasswordClientUpdate"  CssClass="form-control"  runat="server" Enabled="False"></asp:TextBox>
                              </div>
                           </div>
                          <div class="d-flex justify-content-end">
-                            <asp:Button ID="btnUpdateClient"  CssClass="btn btn-primary btn-lg " runat="server" Text="Update Client" OnClick="Button1_Click" Enabled="False"/>
+                            <asp:Button ID="btnUpdateClient"  CssClass="btn btn-primary btn-lg " runat="server" Text="Update Client"  Enabled="False" OnClick="btnUpdateClient_Click"/>
                          </div>
                         </div>
                      </div>

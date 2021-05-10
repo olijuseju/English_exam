@@ -448,7 +448,7 @@ namespace English_exam
         }
 
         [WebMethod]
-        public void UpdateClient(int id, string name, string lastname, int cardnumber, int phone, string password, string email)
+        public void UpdateClient(int id, string name, string lastname, int cardnumber, int phone, string password)
         {
             string DBpath = Server.MapPath("database/marseloDatabase.db");
             using (SQLiteConnection conn = new SQLiteConnection("Data Source=" + DBpath + ";Version=3;"))
