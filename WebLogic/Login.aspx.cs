@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebLogic.localhost;
+using System.Web.Security;
 
 
 namespace WebLogic
@@ -17,6 +18,7 @@ namespace WebLogic
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["valor1"] = null;
+            FormsAuthentication.SignOut();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -41,7 +43,8 @@ namespace WebLogic
                         int valor =Convert.ToInt32(drClient["id"]);
 
                         Session["valor1"] = valor;
-                        Response.Redirect("ClientsPage.aspx");
+                        FormsAuthentication.SetAuthCookie("user", true);
+                        Response.Redirect("user/ClientsPage.aspx");
                     }
                 }
                 else
@@ -52,7 +55,8 @@ namespace WebLogic
                         int valor = Convert.ToInt32(drRecep["id"]);
 
                         Session["valor1"] = valor;
-                        Response.Redirect("ReceptionistPage.aspx");
+                        FormsAuthentication.SetAuthCookie("admin", true);
+                        Response.Redirect("Receptionist/ReceptionistPage.aspx");
                     }
                 }
             }
