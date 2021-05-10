@@ -16,24 +16,39 @@ namespace WebLogic
     public partial class ReceptionistPage : System.Web.UI.Page
     {
         private int role;
+        private List<Client> listOfClients = new List<Client>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack != true)
+            
+            if (Session["valor1"] != null)
             {
-                if (Session["valor1"] != null)
+                setListOfClients();
+
+                isAdmin();
+                if (Page.IsPostBack == false)
                 {
-                    /*Button3.CssClass += " disabled ";
-                    Button3.Text = "Select a client of the list to remove";*/
                     ListBoxClients();
+
                     ListBoxReservation();
-                    isAdmin();
-                }
-                else
-                {
-                    Response.Redirect("Login.aspx");
                 }
             }
-            
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
+
+
+        }
+
+        private void setListOfClients()
+        {
+            listOfClients.Clear();
+            WebService1 webService = new WebService1();
+            DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
+            foreach (DataRow dr in dt.Rows)
+            {
+                listOfClients.Add(new Client(Convert.ToInt32(dr["Id"]), dr["Name"].ToString(), dr["Lastname"].ToString(), (int)Convert.ToInt64(dr["CardNumber"]), (int)Convert.ToInt64(dr["Phone"]), dr["Password"].ToString(), Convert.ToInt32(dr["RecepcionistId"])));
+            }
         }
 
         private void isAdmin()
@@ -54,45 +69,14 @@ namespace WebLogic
 
         private void ListBoxClients()
         {
+           
             ListsOfClientOfRecepcionist.Items.Clear();
-            TablaClientOfReceptionist.Controls.Clear();
-            WebService1 webService = new WebService1();
-            DataTable dt = webService.GetClientByReceptionistId(Convert.ToInt32(Session["valor1"]));
-            StringBuilder clientTable = new StringBuilder();
-            clientTable.Append("<table class=\"table table-striped\" id=\"TableClient\">");
-            clientTable.Append("<thead class=\"thead-dark\">");
-            clientTable.Append("<tr>");
-            clientTable.Append("<th scope=\"col\">Id</th>");
-            clientTable.Append("<th scope=\"col\">Name</th>");
-            clientTable.Append("<th scope=\"col\">Lastname</th>");
-            clientTable.Append("<th scope=\"col\">Cardnumber date</th>");
-            clientTable.Append("<th scope=\"col\">Phone</th>");
-            clientTable.Append("<th scope=\"col\">Password</th>");
-            clientTable.Append("<th scope=\"col\">Actions</th>");
-            clientTable.Append("</tr>");
-            clientTable.Append("</thead>");
-            clientTable.Append("<tbody id=\"ClientData\">");
-            clientTable.Append("<tbody id=\"ClientData\">");
 
-            foreach (DataRow dr in dt.Rows)
+            foreach (Client client in listOfClients)
             {
-                clientTable.Append("<tr>");
-                clientTable.Append("<th scope=\"row\">" + dr[0].ToString() + "</th>");
-                clientTable.Append("<td>" + dr[1].ToString() + "</td>");
-                clientTable.Append("<td>" + dr[2].ToString() + "</td>");
-                clientTable.Append("<td>" + dr[3].ToString() + "</td>");
-                clientTable.Append("<td>" + dr[4].ToString() + "</td>");
-                clientTable.Append("<td>" + dr[5].ToString() + "</td>");
-                clientTable.Append("<td>" + "<button type=\"button\" class=\"btn btn-primary \">Edit</button> <button type=\"button\" class=\" btn btn-danger\">Delete</button>" + "</td>");
-                clientTable.Append("</tr>");
-
-                ListsOfClientOfRecepcionist.Items.Add("Name: "+dr[1].ToString() + " LastName: " + dr[2].ToString() + " CardNumber: " + dr[3].ToString() + " Phone: " + dr[4].ToString() + " Email: " + dr[5].ToString() + " Password: " + dr[6].ToString());
+                ListsOfClientOfRecepcionist.Items.Add("Name: "+client.name + " LastName: " + client.lastName + " CardNumber: " + client.cardNumer.ToString() + " Phone: " + client.phone.ToString() + " Password: " + client.password + " ID Recepcionist: " + client.RecpcionistId.ToString());
 
             }
-
-            clientTable.Append("</tbody>");
-            clientTable.Append("</table>");
-            TablaClientOfReceptionist.Controls.Add(new Label { Text = clientTable.ToString() });
         }
         private void ListBoxReservation()
         {
@@ -329,9 +313,20 @@ namespace WebLogic
             LastnameClientUpdate.Enabled = true;
             CardNumberClientUpdate.Enabled = true;
             PhoneClientUpdate.Enabled = true;
-            EmailClientUpdate.Enabled = true;
+            
             PasswordClientUpdate.Enabled = true;
             btnUpdateClient.Enabled = true;
+            
+            int pos = 0;
+            pos = ListsOfClientOfRecepcionist.SelectedIndex;
+
+            Client updateClient= listOfClients[pos];
+            NameClientUpdate.Text = updateClient.name;
+            LastnameClientUpdate.Text = updateClient.lastName;
+            CardNumberClientUpdate.Text = updateClient.cardNumer.ToString();
+            PhoneClientUpdate.Text = updateClient.phone.ToString();
+            PasswordClientUpdate.Text = updateClient.password;
+            
 
         }
 
@@ -341,13 +336,32 @@ namespace WebLogic
             RemoveClientButton.Enabled = false;
             RemoveClientButton.Text = "Select a client of the list to remove";
             NameClientUpdate.Enabled = false;
+            NameClientUpdate.Text = "";
             LastnameClientUpdate.Enabled = false;
+            LastnameClientUpdate.Text = "";
             CardNumberClientUpdate.Enabled = false;
+            CardNumberClientUpdate.Text = "";
             PhoneClientUpdate.Enabled = false;
-            EmailClientUpdate.Enabled = false;
+            PhoneClientUpdate.Text = "";
             PasswordClientUpdate.Enabled = false;
+            PasswordClientUpdate.Text = "";
             btnUpdateClient.Enabled = false;
 
+        }
+
+        protected void btnUpdateClient_Click(object sender, EventArgs e)
+        {
+            if(NameClientUpdate.Text != "" && LastnameClientUpdate.Text != "" && CardNumberClientUpdate.Text != "" 
+                && PhoneClientUpdate.Text != ""
+                && PasswordClientUpdate.Text != "")
+            {
+                WebService1 webService = new WebService1();
+                //webService.UpdateClient();
+            }
+            else
+            {
+                //dialog
+            }
         }
     }
 }

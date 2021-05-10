@@ -258,15 +258,6 @@ namespace WebLogic
         protected global::System.Web.UI.WebControls.TextBox PhoneClientUpdate;
 
         /// <summary>
-        /// Control EmailClientUpdate.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EmailClientUpdate;
-
-        /// <summary>
         /// Control PasswordClientUpdate.
         /// </summary>
         /// <remarks>
